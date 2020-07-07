@@ -3,7 +3,7 @@ package org.example.Model;
 import java.util.Stack;
 
 public class MazeFactory {
-    public static void recursiveBacktracking(){
+    public static void recursiveBacktracking(Maze maze){
         Stack<Cell> stack = new Stack<Cell>();
         int direction;
         /*maze[0][0].setVisited();
