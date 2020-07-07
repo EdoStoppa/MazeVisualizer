@@ -1,4 +1,5 @@
 package org.example.Model;
 
-public class Cursor {
+public class MazeSolver {
+
 }

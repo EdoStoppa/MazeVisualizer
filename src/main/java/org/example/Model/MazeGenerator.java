@@ -2,14 +2,17 @@ package org.example.Model;
 
 import java.util.Stack;
 
-public class MazeFactory {
-    public static void recursiveBacktracking(Maze maze){
-        Stack<Cell> stack = new Stack<Cell>();
-        int direction;
-        /*maze[0][0].setVisited();
-        stack.push(maze[0][0]);
+public class MazeGenerator {
 
-        while(!stack.empty()){
+    //this is the first (and the most basic) algorithm to generate a maze: Recursive Backtracking
+    public static void recursiveBacktracking(Model model){
+        Stack<Position> stackPos = new Stack<>();
+        Maze maze = model.getMaze();
+        int direction;
+        maze.setStart();
+        stackPos.push(maze.getCurPos());
+
+        /*while(!stack.empty()){
             direction = chooseDirection(cur, maze);
             if(direction != -1){
                 maze[cur.getY()][cur.getX()].breakWall(direction);
@@ -19,10 +22,10 @@ public class MazeFactory {
                 maze[cur.getY()][cur.getX()].breakWall(oppositeDirection(direction));
 
             } else {
-                box = stack.pop();
-                cur.setY(box.getY());
-                cur.setX(box.getX());
+                previousPos = stackPos.pop();
+                maze.setCurPos(previousPos)
             }
         }*/
     }
+
 }
