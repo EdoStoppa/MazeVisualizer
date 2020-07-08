@@ -1,5 +1,6 @@
 package org.example.Model;
 
+import org.example.Model.MazeGenerator.MazeGenerator;
 import org.example.Observ.Observable;
 import org.example.Observ.Observer;
 import org.example.View.View;
@@ -8,23 +9,19 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Model extends Observable<Object> implements Observer<Move> {
-    private final ExecutorService mazeGenerator;
+    private final ExecutorService mazeExecutor;
     private Maze maze;
     protected static int delay;
 
     public Model(View view){
-        this.mazeGenerator = Executors.newFixedThreadPool(4);
+        this.mazeExecutor = Executors.newFixedThreadPool(4);
         addObserver(view);
     }
 
-    public void generateMaze(Maze maze, Runnable mazeGeneratorAlgorithm){
-        this.maze = maze;
+    public void generateMaze(int dimension, MazeGenerator generator){
+        this.maze = new Maze(dimension);
         maze.addObserver(this);
-        mazeGenerator.submit(mazeGeneratorAlgorithm);
-    }
-
-    protected Maze getMaze(){
-        return this.maze;
+        mazeExecutor.submit(() -> generator.generateMaze(this, this.maze));
     }
 
     @Override

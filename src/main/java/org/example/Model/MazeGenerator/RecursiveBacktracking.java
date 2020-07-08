@@ -1,13 +1,16 @@
-package org.example.Model;
+package org.example.Model.MazeGenerator;
+
+import org.example.Model.Maze;
+import org.example.Model.Model;
+import org.example.Model.Position;
 
 import java.util.Stack;
 
-public class MazeGenerator {
-
+public class RecursiveBacktracking implements MazeGenerator{
     //this is the first (and the most basic) algorithm to generate a maze: Recursive Backtracking
-    public static void recursiveBacktracking(Model model){
+    @Override
+    public void generateMaze(Model model, Maze maze){
         Stack<Position> stackPos = new Stack<>();
-        Maze maze = model.getMaze();
         int direction;
         maze.setStart();
         stackPos.push(maze.getCurPos());
@@ -26,6 +29,11 @@ public class MazeGenerator {
                 maze.setCurPos(previousPos)
             }
         }*/
+    }
+
+    @Override
+    public Position getNextPos(Maze maze) {
+        return null;
     }
 
 }

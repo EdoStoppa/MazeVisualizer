@@ -16,6 +16,9 @@ public class Position {
         return this.posY;
     }
 
+    public Position add(Position other){
+        return new Position(posX + other.getPosX(), posY + getPosY());
+    }
     public String toString(){
         return this.posX + "," + this.posY;
     }

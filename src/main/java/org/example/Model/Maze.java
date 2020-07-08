@@ -2,11 +2,16 @@ package org.example.Model;
 
 import org.example.Observ.Observable;
 
+import java.util.List;
+import java.util.Random;
+
 public class Maze extends Observable<Move> {
     private Cell[][] maze;
     private Position curPos;
+    private int dimension;
 
     public Maze(int dimension){
+        this.dimension = dimension;
         this.maze = new Cell[dimension][dimension];
         this.curPos = new Position(0,0);
     }
@@ -31,9 +36,5 @@ public class Maze extends Observable<Move> {
     }
     public boolean cellWasVisited(Position p){
         return this.maze[p.getPosX()][p.getPosY()].hasBeenVisited();
-    }
-    public int getNextDirection(){
-        //this method given the position of the cursor return the next direction randomly
-        return 0;
     }
 }
