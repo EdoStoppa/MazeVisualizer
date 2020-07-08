@@ -22,4 +22,7 @@ public class Position {
     public String toString(){
         return this.posX + "," + this.posY;
     }
+    public Position clone(){
+        return new Position(posX, posY);
+    }
 }

@@ -1,16 +1,21 @@
 package org.example.Model;
 
+import org.example.Message.Message;
+import org.example.Message.Move;
 import org.example.Model.MazeGenerator.MazeGenerator;
+import org.example.Model.MazeGenerator.RecursiveBacktracking;
 import org.example.Observ.Observable;
 import org.example.Observ.Observer;
 import org.example.View.View;
 
+import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Model extends Observable<Object> implements Observer<Move> {
+public class Model extends Observable<Message> implements Observer<Message> {
     private final ExecutorService mazeExecutor;
     private Maze maze;
+    //This value represent the delay used to process every step to show on GUI all the maze generation procedurally
     protected static int delay;
 
     public Model(View view){
@@ -18,15 +23,15 @@ public class Model extends Observable<Object> implements Observer<Move> {
         addObserver(view);
     }
 
-    public void generateMaze(int dimension, MazeGenerator generator){
+    public void createMaze(int dimension, MazeGenerator generator){
         this.maze = new Maze(dimension);
         maze.addObserver(this);
         mazeExecutor.submit(() -> generator.generateMaze(this, this.maze));
     }
 
     @Override
-    public void update(Move message) {
-        //The mazeGenerator has done a move, need to render it
+    public void update(Message message) {
+        //The the mazeGenerator has changed the maze and needs to render those changes
+        notify(message);
     }
-
 }

@@ -23,7 +23,7 @@ public class Cell {
     }
 
     //----------- Methods used to manage all the walls -----------
-    public void brokeWall(int wall){
+    public void breakWall(int wall){
         this.walls[wall] = false;
     }
     public boolean isWallUp(int wall) {

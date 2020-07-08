@@ -1,14 +1,14 @@
 package org.example.Model;
 
+import org.example.Message.Message;
+import org.example.Message.Move;
+import org.example.Message.WallBreak;
 import org.example.Observ.Observable;
 
-import java.util.List;
-import java.util.Random;
-
-public class Maze extends Observable<Move> {
+public class Maze extends Observable<Message> {
     private Cell[][] maze;
     private Position curPos;
-    private int dimension;
+    private final int dimension;
 
     public Maze(int dimension){
         this.dimension = dimension;
@@ -18,16 +18,19 @@ public class Maze extends Observable<Move> {
 
     public void setStart(){
         Position start = new Position(0,0);
-        setCurPos(start);
+        maze[start.getPosX()][start.getPosY()].breakWall(Direction.UP.getDirectionInt());
         setCellAsVisited(start);
+        setCurPos(start);
     }
 
     //----------- Methods used to interact with the cursor used to explore the maze -----------
     public void setCurPos(Position p){
+        Position oldPos = curPos.clone();
         this.curPos = p;
+        notify(new Move(oldPos, curPos, cellWasVisited(curPos.clone())));
     }
     public Position getCurPos(){
-        return this.curPos;
+        return this.curPos.clone();
     }
 
     //----------- Methods used to interacts with a maze's cell given the position -----------
@@ -36,5 +39,19 @@ public class Maze extends Observable<Move> {
     }
     public boolean cellWasVisited(Position p){
         return this.maze[p.getPosX()][p.getPosY()].hasBeenVisited();
+    }
+    public void breakWalls(Direction dir) {
+        Position oldP = curPos.clone();
+        Position nextP = curPos.add(dir.getVector());
+
+        maze[oldP.getPosX()][oldP.getPosY()].breakWall(dir.getDirectionInt());
+        maze[nextP.getPosX()][nextP.getPosY()].breakWall(dir.getOppositeDirectionInt());
+
+        notify(new WallBreak());
+    }
+
+    //----------- Miscellaneous -----------
+    public int getDimension(){
+        return dimension;
     }
 }
