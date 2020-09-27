@@ -28,6 +28,8 @@ public class RecursiveBacktracking implements MazeGenerator {
                 maze.setCurPos(p);
             }
         }
+
+        maze.print();
     }
 
     private Direction getNextDir(Maze maze) {

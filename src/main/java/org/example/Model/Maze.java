@@ -54,4 +54,16 @@ public class Maze extends Observable<Message> {
     public int getDimension(){
         return dimension;
     }
+    public void print(){
+        String ORIZ = "\u2500\u2500\u2500\u2500\u2500";
+        String VERT = "\u2502";
+        String HOLE = "     ";
+
+        System.out.println("\n");
+        System.out.println("  \u250C" + ORIZ + "\u2510");
+        System.out.println("  " + VERT + HOLE + VERT);
+        System.out.println("  \u251C" + ORIZ + "\u2524");
+        System.out.println("  " + VERT + HOLE + VERT);
+        System.out.println("  \u2514" + ORIZ + "\u2518");
+    }
 }
