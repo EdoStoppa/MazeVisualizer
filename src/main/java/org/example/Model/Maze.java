@@ -49,6 +49,9 @@ public class Maze extends Observable<Message> {
 
         notify(new WallBreak());
     }
+    public boolean isAcceptablePos(Position pos){
+        return (pos.getPosX()<dimension && pos.getPosY()<dimension);
+    }
 
     //----------- Miscellaneous -----------
     public int getDimension(){

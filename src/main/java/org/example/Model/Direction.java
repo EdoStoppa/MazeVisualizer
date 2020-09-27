@@ -27,6 +27,36 @@ public enum Direction {
         return vector;
     }
 
+    public static Direction getDir(int i){
+        switch(i){
+            case 0:
+                return Direction.UP;
+            case 1:
+                return Direction.RIGHT;
+            case 2:
+                return Direction.DOWN;
+            case 3:
+                return Direction.LEFT;
+            default:
+                return Direction.UP;
+        }
+    }
+    public static Direction nextDir(Direction dir){
+        switch(dir){
+            case UP:
+                return Direction.RIGHT;
+            case RIGHT:
+                return Direction.DOWN;
+            case DOWN:
+                return Direction.LEFT;
+            case LEFT:
+                return Direction.UP;
+            default:
+                return UP ;
+        }
+
+    }
+
     public static List<Direction> getAllDirections(){
         List<Direction> listPos = new ArrayList<>();
         listPos.add(UP);
