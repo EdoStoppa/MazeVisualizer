@@ -14,6 +14,12 @@ public class Maze extends Observable<Message> {
         this.dimension = dimension;
         this.maze = new Cell[dimension][dimension];
         this.curPos = new Position(0,0);
+
+        for(int i=0; i<dimension; i++){
+            for(int j=0; j<dimension; j++){
+                this.maze[i][j] = new Cell();
+            }
+        }
     }
 
     public void setStart(){
@@ -27,7 +33,7 @@ public class Maze extends Observable<Message> {
     public void setCurPos(Position p){
         Position oldPos = curPos.clone();
         this.curPos = p;
-        notify(new Move(oldPos, curPos, cellWasVisited(curPos.clone())));
+        notify(new Move(oldPos, curPos, cellWasVisited(p.clone())));
     }
     public Position getCurPos(){
         return this.curPos.clone();

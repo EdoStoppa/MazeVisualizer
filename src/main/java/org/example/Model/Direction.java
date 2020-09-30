@@ -9,8 +9,8 @@ public enum Direction {
     DOWN(2, new Position(0,1)),
     LEFT(3, new Position(-1,0));
 
-    private int directionInt;
-    private Position vector;
+    private final int directionInt;
+    private final Position vector;
 
     Direction(int dir, Position vec){
         directionInt = dir;
@@ -55,14 +55,5 @@ public enum Direction {
                 return UP ;
         }
 
-    }
-
-    public static List<Direction> getAllDirections(){
-        List<Direction> listPos = new ArrayList<>();
-        listPos.add(UP);
-        listPos.add(RIGHT);
-        listPos.add(DOWN);
-        listPos.add(LEFT);
-        return listPos;
     }
 }

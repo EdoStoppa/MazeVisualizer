@@ -19,6 +19,9 @@ public class Move implements Message{
     public Position getNewPos() {
         return this.newPos;
     }
+    public boolean getWasVisited() {
+        return this.wasVisited;
+    }
 
     @Override
     public void renderGUI() {

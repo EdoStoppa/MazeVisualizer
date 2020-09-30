@@ -1,6 +1,5 @@
 package org.example.View;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.example.Message.Message;
 import org.example.Model.Model;
 import org.example.Observ.Observer;
