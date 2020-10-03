@@ -17,7 +17,10 @@ public class Position {
     }
 
     public Position add(Position other){
-        return new Position(posX + other.getPosX(), posY + getPosY());
+        int _x = posX + other.getPosX();
+        int _y = posY + other.getPosY();
+
+        return (new Position(_x, _y));
     }
 
     public boolean equals(Position p){

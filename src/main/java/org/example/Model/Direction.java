@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Direction {
-    UP(0, new Position(0,-1)),
-    RIGHT(1, new Position(1,0)),
-    DOWN(2, new Position(0,1)),
-    LEFT(3, new Position(-1,0));
+    UP(0, new Position(-1,0)),
+    RIGHT(1, new Position(0,1)),
+    DOWN(2, new Position(1,0)),
+    LEFT(3, new Position(0,-1));
 
     private final int directionInt;
     private final Position vector;
@@ -24,7 +24,7 @@ public enum Direction {
         return (directionInt +2)%4;
     }
     public Position getVector(){
-        return vector;
+        return vector.clone();
     }
 
     public static Direction getDir(int i){

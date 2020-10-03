@@ -46,4 +46,40 @@ class MazeTest {
         System.out.println("Cleared test 1");
     }
 
+    @Test
+    void canMoveToGeneral(){
+        m.setCurPos(new Position(0,0));
+        isEveryWallUp();
+
+        m.setCurPos(new Position(0, m.getDimension()-1));
+        isEveryWallUp();
+
+        m.setCurPos(new Position(m.getDimension()-1, 0));
+        isEveryWallUp();
+
+        m.setCurPos(new Position(m.getDimension()-1, m.getDimension()-1));
+        isEveryWallUp();
+
+        m.setCurPos(new Position(3, 5));
+        isEveryWallUp();
+    }
+
+    @Test
+    void breakWallsBasic(){
+        Position currPos = m.getCurPos();
+        m.breakWalls(Direction.DOWN);
+
+        assertTrue(m.canMoveTo(Direction.DOWN), "This wall should be broken");
+        m.setCurPos(currPos.add(Direction.DOWN.getVector()));
+        assertTrue(m.canMoveTo(Direction.UP), "This wall should be broken");
+        m.print();
+    }
+
+    void isEveryWallUp(){
+        assertFalse(m.canMoveTo(Direction.DOWN), "The wall should be up");
+        assertFalse(m.canMoveTo(Direction.RIGHT), "The wall should be up");
+        assertFalse(m.canMoveTo(Direction.LEFT), "The wall should be up");
+        assertFalse(m.canMoveTo(Direction.UP), "The wall should be up");
+    }
+
 }

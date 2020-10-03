@@ -20,8 +20,8 @@ public class RecursiveBacktracking implements MazeGenerator {
         while(!stackPos.empty()){
             nextDir = getNextDir(maze);
             if(nextDir != null){
-                maze.breakWalls(nextDir);
                 stackPos.push(maze.getCurPos());
+                maze.breakWalls(nextDir);
                 maze.setCurPos(maze.getCurPos().add(nextDir.getVector()));
                 maze.setCellAsVisited(maze.getCurPos());
             } else {
@@ -42,8 +42,8 @@ public class RecursiveBacktracking implements MazeGenerator {
         nextDir = Direction.getDir(rand.nextInt(4));
 
         for(int start=0; start<4; start++){
-
-            nextPos = curPos.clone().add(nextDir.getVector());
+            curPos = maze.getCurPos();
+            nextPos = curPos.add(nextDir.getVector());
 
             if(maze.isAcceptablePos(nextPos)){
                 if(!maze.cellWasVisited(nextPos)){

@@ -56,7 +56,15 @@ public class Maze extends Observable<Message> {
         notify(new WallBreak());
     }
     public boolean isAcceptablePos(Position pos){
-        return (pos.getPosX()<dimension && pos.getPosY()<dimension);
+        return (pos.getPosX()<dimension && pos.getPosX()>=0 && pos.getPosY()<dimension && pos.getPosY()>=0) ;
+    }
+    public boolean canMoveTo(Direction dir){
+        Position next = curPos.add(dir.getVector());
+
+        if(isAcceptablePos(next))
+            return !maze[curPos.getPosX()][curPos.getPosY()].isWallUp(dir.getDirectionInt());
+
+        return false;
     }
 
     //----------- Miscellaneous -----------
@@ -64,15 +72,111 @@ public class Maze extends Observable<Message> {
         return dimension;
     }
     public void print(){
-        String ORIZ = "\u2500\u2500\u2500\u2500\u2500";
-        String VERT = "\u2502";
         String HOLE = "     ";
 
-        System.out.println("\n");
-        System.out.println("  \u250C" + ORIZ + "\u2510");
-        System.out.println("  " + VERT + HOLE + VERT);
-        System.out.println("  \u251C" + ORIZ + "\u2524");
-        System.out.println("  " + VERT + HOLE + VERT);
-        System.out.println("  \u2514" + ORIZ + "\u2518");
+        //String ORIZ_LONG = "\u2500\u2500\u2500\u2500\u2500";
+        String ORIZ = "\u2500";
+        String ORIZ_LONG = ORIZ + ORIZ + ORIZ + ORIZ + ORIZ;
+        String VERT = "\u2502";
+
+        String MID_RIGHT = "\u251C";
+        String MID = "\u253C";
+        String MID_LEFT = "\u2524";
+        String MID_DOWN = "\u252C";
+        String MID_UP = "\u2534";
+
+        String HALF_LEFT = "\u2574";
+        String HALF_RIGHT = "\u2576";
+        String HALF_TOP = "\u2575";
+        String HALF_BOTTOM = "\u2577";
+
+
+        String C_LEFT_TOP = "\u250C";
+        String C_RIGHT_TOP = "\u2510";
+        String C_LEFT_BOTTOM = "\u2514";
+        String C_RIGHT_BOTTOM = "\u2518";
+
+        String END_BLOCK = ORIZ_LONG + MID_UP;
+
+        System.out.println("\n     \u2193");
+
+        // FIRST LINE
+        System.out.print("  " + C_LEFT_TOP);
+        System.out.print(HOLE + (maze[0][0].isWallUp(Direction.RIGHT.getDirectionInt()) ? MID_DOWN : ORIZ));
+        for(int i=1; i<dimension-1; i++)
+            System.out.print(ORIZ_LONG + (maze[0][i].isWallUp(Direction.RIGHT.getDirectionInt()) ? MID_DOWN : ORIZ));
+        System.out.println(ORIZ_LONG + C_RIGHT_TOP);
+
+        // MID MAZE
+        for(int line=0; line<dimension; line++){
+            System.out.print("  " + VERT);
+            for(int col1=0; col1<dimension; col1++){
+                System.out.print(HOLE + (maze[line][col1].isWallUp(Direction.RIGHT.getDirectionInt()) ? VERT : " "));
+            }
+            System.out.println();
+
+            if(line < dimension-1){
+                System.out.print("  " + (maze[line][0].isWallUp(Direction.DOWN.getDirectionInt()) ? MID_RIGHT : VERT));
+
+                for(int col2=0; col2<dimension-1; col2++){
+                    System.out.print((maze[line][col2].isWallUp(Direction.DOWN.getDirectionInt()) ? ORIZ_LONG : HOLE) + chooseMid(line, col2));
+                }
+
+                System.out.print((maze[line][dimension-1].isWallUp(Direction.DOWN.getDirectionInt()) ? ORIZ_LONG + MID_LEFT: HOLE + VERT));
+                System.out.println();
+            }
+
+        }
+
+        // LAST LINE
+        System.out.print("  " + C_LEFT_BOTTOM);
+        for(int i=0; i<dimension-1; i++){
+            System.out.print(ORIZ_LONG + ( maze[dimension-1][i].isWallUp(Direction.RIGHT.getDirectionInt()) ? MID_UP : ORIZ));
+        }
+
+        System.out.println(HOLE + C_RIGHT_BOTTOM);
+        System.out.print("     ");
+        for(int k=0; k<dimension-1; k++)
+            System.out.print(HOLE + " ");
+        System.out.println( "\u2193\n");
+    }
+    private String chooseMid(int line, int col){
+        boolean left = maze[line][col].isWallUp(Direction.DOWN.getDirectionInt());
+        boolean up = maze[line][col].isWallUp(Direction.RIGHT.getDirectionInt());
+        boolean right = maze[line][col+1].isWallUp(Direction.DOWN.getDirectionInt());
+        boolean down = maze[line+1][col].isWallUp(Direction.RIGHT.getDirectionInt());
+
+        if(left && !up && !right && !down)
+            return "\u2574";
+        if(left && up && !right && !down)
+            return "\u2518";
+        if(left && up && right && !down)
+            return "\u2534";
+        if(left && !up && !right && down)
+            return "\u2510";
+        if(left && !up && right && down)
+            return "\u252C";
+        if(left && !up && right && !down)
+            return "\u2500";
+        if(!left && up && !right && !down)
+            return "\u2575";
+        if(!left && up && right && !down)
+            return "\u2514";
+        if(!left && up && right && down)
+            return "\u251C";
+        if(!left && up && !right && down)
+            return "\u2502";
+        if(left && up && !right && down)
+            return "\u2524";
+        if(!left && !up && right && !down)
+            return "\u2576";
+        if(!left && !up && right && down)
+            return "\u250C";
+        if(!left && !up && !right && down)
+            return "\u2577";
+
+
+        return "┼";
+
     }
 }
