@@ -5,7 +5,7 @@ import org.example.Model.Position;
 public class Move implements Message{
     private final Position oldPos;
     private final Position newPos;
-    private boolean wasVisited;
+    private final boolean wasVisited;
 
     public Move(Position oldP, Position newP, boolean wasVisited){
         this.oldPos = oldP;

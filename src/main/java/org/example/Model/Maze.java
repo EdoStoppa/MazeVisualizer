@@ -2,6 +2,7 @@ package org.example.Model;
 
 import org.example.Message.Message;
 import org.example.Message.Move;
+import org.example.Message.Visited;
 import org.example.Message.WallBreak;
 import org.example.Observ.Observable;
 
@@ -22,11 +23,9 @@ public class Maze extends Observable<Message> {
         }
     }
 
-    public void setStart(){
-        Position start = new Position(0,0);
-        maze[start.getPosX()][start.getPosY()].breakWall(Direction.UP.getDirectionInt());
-        setCellAsVisited(start);
-        setCurPos(start);
+    public void createStartEnd(){
+        maze[0][0].breakWall(Direction.UP.getDirectionInt());
+        maze[dimension-1][dimension-1].breakWall(Direction.UP.getDirectionInt());
     }
 
     //----------- Methods used to interact with the cursor used to explore the maze -----------
@@ -39,16 +38,17 @@ public class Maze extends Observable<Message> {
         return this.curPos.clone();
     }
 
-    //----------- Methods used to interacts with a maze's cell given the position -----------
+    //----------- Methods used to interacts with a maze's cell given the position and/or movement direction -----------
     public void setCellAsVisited(Position p){
         this.maze[p.getPosX()][p.getPosY()].setAsVisited();
+        notify(new Visited(p.clone()));
     }
     public boolean cellWasVisited(Position p){
         return this.maze[p.getPosX()][p.getPosY()].hasBeenVisited();
     }
-    public void breakWalls(Direction dir) {
-        Position oldP = curPos.clone();
-        Position nextP = curPos.add(dir.getVector());
+    public void breakWalls(Position pos, Direction dir) {
+        Position oldP = pos.clone();
+        Position nextP = pos.add(dir.getVector());
 
         maze[oldP.getPosX()][oldP.getPosY()].breakWall(dir.getDirectionInt());
         maze[nextP.getPosX()][nextP.getPosY()].breakWall(dir.getOppositeDirectionInt());
@@ -58,11 +58,11 @@ public class Maze extends Observable<Message> {
     public boolean isAcceptablePos(Position pos){
         return (pos.getPosX()<dimension && pos.getPosX()>=0 && pos.getPosY()<dimension && pos.getPosY()>=0) ;
     }
-    public boolean canMoveTo(Direction dir){
-        Position next = curPos.add(dir.getVector());
+    public boolean canMoveTo(Position pos, Direction dir){
+        Position next = pos.add(dir.getVector());
 
         if(isAcceptablePos(next))
-            return !maze[curPos.getPosX()][curPos.getPosY()].isWallUp(dir.getDirectionInt());
+            return !maze[pos.getPosX()][pos.getPosY()].isWallUp(dir.getDirectionInt());
 
         return false;
     }

@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MazeTest {
-
     private class Receiver implements Observer<Message>{
         private Message message;
 
@@ -42,8 +41,6 @@ class MazeTest {
         assertTrue(((Move)r.getMessage()).getOldPos().equals(new Position(0,0)), "The oldPos received should be the initial pos");
         assertTrue(((Move)r.getMessage()).getNewPos().equals(new Position(1,1)), "The newPos received should be the actual pos");
         assertFalse(((Move) r.getMessage()).getWasVisited(), "The new cell shouldn't be visited");
-
-        System.out.println("Cleared test 1");
     }
 
     @Test
@@ -67,19 +64,19 @@ class MazeTest {
     @Test
     void breakWallsBasic(){
         Position currPos = m.getCurPos();
-        m.breakWalls(Direction.DOWN);
+        m.breakWalls(currPos, Direction.DOWN);
 
-        assertTrue(m.canMoveTo(Direction.DOWN), "This wall should be broken");
+        assertTrue(m.canMoveTo(currPos, Direction.DOWN), "This wall should be broken");
         m.setCurPos(currPos.add(Direction.DOWN.getVector()));
-        assertTrue(m.canMoveTo(Direction.UP), "This wall should be broken");
-        m.print();
+        assertTrue(m.canMoveTo(m.getCurPos(), Direction.UP), "This wall should be broken");
     }
 
     void isEveryWallUp(){
-        assertFalse(m.canMoveTo(Direction.DOWN), "The wall should be up");
-        assertFalse(m.canMoveTo(Direction.RIGHT), "The wall should be up");
-        assertFalse(m.canMoveTo(Direction.LEFT), "The wall should be up");
-        assertFalse(m.canMoveTo(Direction.UP), "The wall should be up");
+        Position currPos = m.getCurPos();
+        assertFalse(m.canMoveTo(currPos, Direction.DOWN), "The wall should be up");
+        assertFalse(m.canMoveTo(currPos, Direction.RIGHT), "The wall should be up");
+        assertFalse(m.canMoveTo(currPos, Direction.LEFT), "The wall should be up");
+        assertFalse(m.canMoveTo(currPos, Direction.UP), "The wall should be up");
     }
 
 }
