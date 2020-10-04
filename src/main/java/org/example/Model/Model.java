@@ -13,9 +13,10 @@ public class Model extends Observable<Message> implements Observer<Message> {
     private final ExecutorService mazeExecutor;
     private Maze maze;
     //This value represent the delay used to process every step to show on GUI all the maze generation procedurally
-    protected static int delay;
+    private int delay;
 
     public Model(View view){
+        this.delay = 0;
         this.mazeExecutor = Executors.newFixedThreadPool(4);
         addObserver(view);
     }
@@ -28,6 +29,13 @@ public class Model extends Observable<Message> implements Observer<Message> {
 
     public void killAll(){
         mazeExecutor.shutdown();
+    }
+
+    public int getDelay(){
+        return delay;
+    }
+    public void setDelay(int delay){
+        this.delay = delay;
     }
 
     @Override

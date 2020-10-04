@@ -18,16 +18,25 @@ public class IterativeBacktracking implements MazeGenerator {
         stackPos.push(maze.getCurPos());
 
         while(!stackPos.empty()){
+            if(model.getDelay() > 0){
+                try{
+                    Thread.sleep(model.getDelay());
+                } catch(IllegalArgumentException | InterruptedException e){
+                    System.err.println("Something went wrong in the sleep");
+                }
+            }
+
             nextDir = getNextDir(maze);
             if(nextDir != null){
                 stackPos.push(maze.getCurPos());
                 maze.breakWalls(nextDir);
-                maze.setCurPos(maze.getCurPos().add(nextDir.getVector()));
-                maze.setCellAsVisited(maze.getCurPos());
+                p = maze.getCurPos().add(nextDir.getVector());
+                maze.setCellAsVisited(p);
             } else {
                 p = stackPos.pop();
-                maze.setCurPos(p);
             }
+            
+            maze.setCurPos(p);
         }
 
         maze.print();
