@@ -53,7 +53,7 @@ public class Maze extends Observable<Message> {
         maze[oldP.getPosX()][oldP.getPosY()].breakWall(dir.getDirectionInt());
         maze[nextP.getPosX()][nextP.getPosY()].breakWall(dir.getOppositeDirectionInt());
 
-        notify(new WallBreak());
+        notify(new WallBreak(oldP, nextP, dir));
     }
     public boolean isAcceptablePos(Position pos){
         return (pos.getPosX()<dimension && pos.getPosX()>=0 && pos.getPosY()<dimension && pos.getPosY()>=0) ;

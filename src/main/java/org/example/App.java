@@ -1,8 +1,8 @@
 package org.example;
 
-import org.example.Model.Maze;
-import org.example.Model.MazeGenerator.RecursiveBacktracking;
+import org.example.Model.MazeGenerator.IterativeBacktracking;
 import org.example.Model.Model;
+import org.example.View.View;
 
 /**
  * Hello world!
@@ -11,8 +11,10 @@ import org.example.Model.Model;
 public class App 
 {
     public static void main( String[] args ) {
-        Maze m = new Maze(15);
-        //m.print();
-        (new RecursiveBacktracking()).generateMaze(null, m);
+        View view = new View();
+        Model model = new Model(view);
+
+        model.createMaze(12, new IterativeBacktracking());
+        model.killAll();
     }
 }

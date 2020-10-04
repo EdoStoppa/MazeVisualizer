@@ -1,14 +1,11 @@
 package org.example.Model;
 
 import org.example.Message.Message;
-import org.example.Message.Move;
 import org.example.Model.MazeGenerator.MazeGenerator;
-import org.example.Model.MazeGenerator.RecursiveBacktracking;
 import org.example.Observ.Observable;
 import org.example.Observ.Observer;
 import org.example.View.View;
 
-import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -27,6 +24,10 @@ public class Model extends Observable<Message> implements Observer<Message> {
         this.maze = new Maze(dimension);
         maze.addObserver(this);
         mazeExecutor.submit(() -> generator.generateMaze(this, this.maze));
+    }
+
+    public void killAll(){
+        mazeExecutor.shutdown();
     }
 
     @Override

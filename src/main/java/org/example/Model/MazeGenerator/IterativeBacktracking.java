@@ -8,7 +8,7 @@ import org.example.Model.Position;
 import java.util.Random;
 import java.util.Stack;
 
-public class RecursiveBacktracking implements MazeGenerator {
+public class IterativeBacktracking implements MazeGenerator {
     @Override
     public void generateMaze(Model model, Maze maze){
         Stack<Position> stackPos = new Stack<>();
