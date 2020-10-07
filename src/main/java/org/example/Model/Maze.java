@@ -11,14 +11,22 @@ public class Maze extends Observable<Message> {
     private Position curPos;
     private final int dimension;
 
-    public Maze(int dimension){
+    public Maze(int dimension, boolean isWallsUp){
         this.dimension = dimension;
         this.maze = new Cell[dimension][dimension];
         this.curPos = new Position(0,0);
 
         for(int i=0; i<dimension; i++){
             for(int j=0; j<dimension; j++){
-                this.maze[i][j] = new Cell();
+                this.maze[i][j] = new Cell(isWallsUp);
+                if(!isWallsUp){
+                    if(i==dimension-1){
+                        this.maze[i][j].raiseWall(Direction.DOWN.getDirectionInt());
+                    }
+                    if(j==dimension-1){
+                        this.maze[i][j].raiseWall(Direction.RIGHT.getDirectionInt());
+                    }
+                }
             }
         }
     }
@@ -65,6 +73,9 @@ public class Maze extends Observable<Message> {
             return !maze[pos.getPosX()][pos.getPosY()].isWallUp(dir.getDirectionInt());
 
         return false;
+    }
+    public void raiseWall(int x, int y, Direction wall){
+        maze[x][y].raiseWall(wall.getDirectionInt());
     }
 
     //----------- Miscellaneous -----------

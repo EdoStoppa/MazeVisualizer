@@ -6,4 +6,5 @@ import org.example.Model.Model;
 
 public interface MazeGenerator {
     void generateMaze(Model model, Maze maze);
+    boolean wallSetup();
 }

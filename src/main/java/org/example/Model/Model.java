@@ -22,7 +22,7 @@ public class Model extends Observable<Message> implements Observer<Message> {
     }
 
     public void createMaze(int dimension, MazeGenerator generator){
-        this.maze = new Maze(dimension);
+        this.maze = new Maze(dimension, generator.wallSetup());
         maze.addObserver(this);
         mazeExecutor.submit(() -> generator.generateMaze(this, this.maze));
     }

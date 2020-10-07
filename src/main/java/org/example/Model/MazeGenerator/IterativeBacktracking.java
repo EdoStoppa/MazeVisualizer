@@ -59,6 +59,11 @@ public class IterativeBacktracking implements MazeGenerator {
         maze.print();
     }
 
+    @Override
+    public boolean wallSetup() {
+        return true;
+    }
+
     private Direction getNextDir(Maze maze) {
         Position curPos, nextPos;
         Direction nextDir;

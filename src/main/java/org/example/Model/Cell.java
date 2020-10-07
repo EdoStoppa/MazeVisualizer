@@ -6,10 +6,10 @@ public class Cell {
     private boolean[] walls;
     private boolean visited;
 
-    public Cell(){
+    public Cell(boolean b){
         this.walls = new boolean[4];
         for(int i=0; i<4; i++)
-            this.walls[i] = true;
+            this.walls[i] = b;
 
         this.visited = false;
     }
@@ -25,6 +25,9 @@ public class Cell {
     //----------- Methods used to manage all the walls -----------
     public void breakWall(int wall){
         this.walls[wall] = false;
+    }
+    public void raiseWall(int wall) {
+        this.walls[wall] = true;
     }
     public boolean isWallUp(int wall) {
         return this.walls[wall];

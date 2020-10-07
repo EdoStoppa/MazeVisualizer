@@ -1,7 +1,6 @@
 package org.example;
 
-import org.example.Model.MazeGenerator.IterativeBacktracking;
-import org.example.Model.MazeGenerator.RandomizedPrim;
+import org.example.Model.MazeGenerator.*;
 import org.example.Model.Model;
 import org.example.View.View;
 
@@ -15,7 +14,7 @@ public class App
         View view = new View();
         Model model = new Model(view);
 
-        model.createMaze(12, new RandomizedPrim());
+        model.createMaze(8, new RecursiveDivision());
         model.killAll();
     }
 }

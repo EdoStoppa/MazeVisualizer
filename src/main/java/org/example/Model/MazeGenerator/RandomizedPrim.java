@@ -77,6 +77,11 @@ public class RandomizedPrim implements MazeGenerator{
         maze.print();
     }
 
+    @Override
+    public boolean wallSetup() {
+        return true;
+    }
+
     public void addWalls(Maze m, Position p, List<Wall> list){
         for(int i=0; i<4; i++){
             if(!m.canMoveTo(p, Direction.getDir(i)))

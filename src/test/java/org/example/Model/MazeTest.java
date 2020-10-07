@@ -28,7 +28,7 @@ class MazeTest {
     @BeforeEach
     void init(){
         r = new Receiver();
-        m = new Maze(10);
+        m = new Maze(10, true);
         m.addObserver(r);
     }
 
