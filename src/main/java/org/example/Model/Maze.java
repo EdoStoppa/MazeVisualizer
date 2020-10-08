@@ -4,12 +4,21 @@ import org.example.Message.Message;
 import org.example.Message.Move;
 import org.example.Message.Visited;
 import org.example.Message.WallBreak;
+import org.example.Model.MazeGenerator.IterativeBacktracking;
+import org.example.Model.MazeGenerator.MazeGenerator;
+import org.example.Model.MazeGenerator.RandomizedPrim;
+import org.example.Model.MazeGenerator.RecursiveDivision;
+import org.example.Model.MazeSolver.MazeSolver;
 import org.example.Observ.Observable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Maze extends Observable<Message> {
     private Cell[][] maze;
     private Position curPos;
     private final int dimension;
+    private boolean complete = false;
 
     public Maze(int dimension, boolean isWallsUp){
         this.dimension = dimension;
@@ -80,9 +89,30 @@ public class Maze extends Observable<Message> {
         maze[x][y].raiseWall(wall.getDirectionInt());
     }
 
+    //----------- Methods to get which generator and which solver are available -----------
+    static public List<MazeGenerator> getAllGenerators(){
+        List<MazeGenerator> generatorList = new ArrayList<>();
+
+        generatorList.add(new IterativeBacktracking());
+        generatorList.add(new RandomizedPrim());
+        generatorList.add(new RecursiveDivision());
+
+        return generatorList;
+    }
+    static public List<MazeSolver> getAllSolvers(){
+        List<MazeSolver> solverList = new ArrayList<>();
+
+        // Add all solver when implemented
+
+        return solverList;
+    }
+
     //----------- Miscellaneous -----------
     public int getDimension(){
         return dimension;
+    }
+    public boolean getComplete() {
+        return complete;
     }
     public void print(){
         String HOLE = "     ";
