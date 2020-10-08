@@ -28,8 +28,8 @@ public class RecursiveDivision implements MazeGenerator{
 
         if(!(origin.equals(bound) || maxY == minY || maxX == minX)){
 
-            raiseWallLine(midY, minY, maxY, true, maze);
-            raiseWallLine(midX, minX, maxX, false, maze);
+            raiseWallLine(midY, minX, maxX, false, maze);
+            raiseWallLine(midX, minY, maxY, true, maze);
 
             //chosen at random in 3 of the 4 semi-lines only one wall to destroy
             noWallSegment = rand.nextInt(4);

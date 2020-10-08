@@ -19,6 +19,7 @@ public class Maze extends Observable<Message> {
         for(int i=0; i<dimension; i++){
             for(int j=0; j<dimension; j++){
                 this.maze[i][j] = new Cell(isWallsUp);
+
                 if(!isWallsUp){
                     if(i==dimension-1){
                         this.maze[i][j].raiseWall(Direction.DOWN.getDirectionInt());
@@ -29,6 +30,7 @@ public class Maze extends Observable<Message> {
                 }
             }
         }
+
     }
 
     public void createStartEnd(){

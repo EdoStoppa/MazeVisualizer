@@ -14,7 +14,7 @@ public class App
         View view = new View();
         Model model = new Model(view);
 
-        model.createMaze(8, new RecursiveDivision());
+        model.createMaze(21, new IterativeBacktracking());
         model.killAll();
     }
 }
