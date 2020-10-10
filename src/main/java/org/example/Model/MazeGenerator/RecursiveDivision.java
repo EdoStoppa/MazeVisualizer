@@ -7,6 +7,16 @@ import org.example.Model.Position;
 
 import java.util.Random;
 
+/*
+ *  Algorithm's high-level description (from Wikipedia: https://en.wikipedia.org/wiki/Maze_generation_algorithm)
+ *
+ * Recursive Division:
+ * - Begin with the maze's space with no walls (we call this a chamber)
+ *
+ * - Divide the chamber with two perpendicular line of walls where each semi-line contains a randomly placed hole
+ * - Repeat the process with the new generated sub-chambers until you reach the chamber minimum size
+ *
+ */
 public class RecursiveDivision implements MazeGenerator{
     @Override
     public void generateMaze(Model model, Maze maze) {

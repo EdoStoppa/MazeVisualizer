@@ -6,7 +6,6 @@ import org.example.Model.MazeSolver.MazeSolver;
 import org.example.Model.Model;
 import org.example.View.View;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;

@@ -2,6 +2,7 @@ package org.example.Model;
 
 import org.example.Message.Message;
 import org.example.Model.MazeGenerator.MazeGenerator;
+import org.example.Model.MazeSolver.MazeSolver;
 import org.example.Observ.Observable;
 import org.example.Observ.Observer;
 import org.example.View.View;
@@ -25,6 +26,12 @@ public class Model extends Observable<Message> implements Observer<Message> {
         maze.addObserver(this);
         this.currentThread = new Thread(() ->{
             generator.generateMaze(this, this.maze);
+        });
+        currentThread.start();
+    }
+    public void solveMaze(MazeSolver solver){
+        this.currentThread = new Thread(() ->{
+            solver.solveMaze(this, this.maze);
         });
         currentThread.start();
     }

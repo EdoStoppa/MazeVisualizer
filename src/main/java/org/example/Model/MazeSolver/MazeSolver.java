@@ -1,5 +1,7 @@
 package org.example.Model.MazeSolver;
 
-public class MazeSolver {
+import org.example.Model.*;
 
+public interface MazeSolver {
+    void solveMaze(Model model, Maze maze);
 }

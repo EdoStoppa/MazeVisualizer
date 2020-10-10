@@ -18,6 +18,9 @@ public class Cell {
     public void setAsVisited(){
         this.visited = true;
     }
+    public void resetVisited() {
+        this.visited = false;
+    }
     public boolean hasBeenVisited(){
         return this.visited;
     }

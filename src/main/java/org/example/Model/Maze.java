@@ -12,18 +12,20 @@ import org.example.Model.MazeSolver.MazeSolver;
 import org.example.Observ.Observable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Maze extends Observable<Message> {
-    private Cell[][] maze;
+    private final Cell[][] maze;
     private Position curPos;
     private final int dimension;
-    private boolean complete = false;
+    private List<Position> solution;
 
     public Maze(int dimension, boolean isWallsUp){
         this.dimension = dimension;
         this.maze = new Cell[dimension][dimension];
         this.curPos = new Position(0,0);
+        this.solution = null;
 
         for(int i=0; i<dimension; i++){
             for(int j=0; j<dimension; j++){
@@ -88,6 +90,13 @@ public class Maze extends Observable<Message> {
     public void raiseWall(int x, int y, Direction wall){
         maze[x][y].raiseWall(wall.getDirectionInt());
     }
+    public void resetMazeVisited(){
+        for(int i=0; i<dimension; i++){
+            for(int j=0; j<dimension; j++){
+                maze[i][j].resetVisited();
+            }
+        }
+    }
 
     //----------- Methods to get which generator and which solver are available -----------
     static public List<MazeGenerator> getAllGenerators(){
@@ -111,35 +120,38 @@ public class Maze extends Observable<Message> {
     public int getDimension(){
         return dimension;
     }
-    public boolean getComplete() {
-        return complete;
+    public void setSolution(List<Position> solution){
+        this.solution = solution;
     }
+    public List<Position> getSolution(){
+        return this.solution;
+    }
+
     public void print(){
         String HOLE = "     ";
+        String HOLE_FOUND = "  X  ";
+        String needed;
+        HashMap<String, Position> posMap = null;
 
-        //String ORIZ_LONG = "\u2500\u2500\u2500\u2500\u2500";
         String ORIZ = "\u2500";
         String ORIZ_LONG = ORIZ + ORIZ + ORIZ + ORIZ + ORIZ;
-        String VERT = "\u2502";
 
+        String VERT = "\u2502";
         String MID_RIGHT = "\u251C";
-        String MID = "\u253C";
         String MID_LEFT = "\u2524";
         String MID_DOWN = "\u252C";
         String MID_UP = "\u2534";
-
-        String HALF_LEFT = "\u2574";
-        String HALF_RIGHT = "\u2576";
-        String HALF_TOP = "\u2575";
-        String HALF_BOTTOM = "\u2577";
-
 
         String C_LEFT_TOP = "\u250C";
         String C_RIGHT_TOP = "\u2510";
         String C_LEFT_BOTTOM = "\u2514";
         String C_RIGHT_BOTTOM = "\u2518";
 
-        String END_BLOCK = ORIZ_LONG + MID_UP;
+        if(solution != null){
+            posMap = new HashMap<>();
+            for(Position p : solution)
+                posMap.put(p.toString(), p);
+        }
 
         System.out.println("\n     \u2193");
 
@@ -154,7 +166,11 @@ public class Maze extends Observable<Message> {
         for(int line=0; line<dimension; line++){
             System.out.print("  " + VERT);
             for(int col1=0; col1<dimension; col1++){
-                System.out.print(HOLE + (maze[line][col1].isWallUp(Direction.RIGHT.getDirectionInt()) ? VERT : " "));
+                if(posMap != null)
+                    needed = posMap.containsKey(new Position(line, col1).toString())? HOLE_FOUND : HOLE;
+                else
+                    needed = HOLE;
+                System.out.print(needed + (maze[line][col1].isWallUp(Direction.RIGHT.getDirectionInt()) ? VERT : " "));
             }
             System.out.println();
 
@@ -173,9 +189,8 @@ public class Maze extends Observable<Message> {
 
         // LAST LINE
         System.out.print("  " + C_LEFT_BOTTOM);
-        for(int i=0; i<dimension-1; i++){
+        for(int i=0; i<dimension-1; i++)
             System.out.print(ORIZ_LONG + ( maze[dimension-1][i].isWallUp(Direction.RIGHT.getDirectionInt()) ? MID_UP : ORIZ));
-        }
 
         System.out.println(HOLE + C_RIGHT_BOTTOM);
         System.out.print("     ");
