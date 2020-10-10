@@ -4,4 +4,5 @@ import org.example.Model.*;
 
 public interface MazeSolver {
     void solveMaze(Model model, Maze maze);
+    String toString();
 }

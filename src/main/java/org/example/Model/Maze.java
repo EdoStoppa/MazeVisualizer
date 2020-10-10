@@ -9,6 +9,7 @@ import org.example.Model.MazeGenerator.MazeGenerator;
 import org.example.Model.MazeGenerator.RandomizedPrim;
 import org.example.Model.MazeGenerator.RecursiveDivision;
 import org.example.Model.MazeSolver.MazeSolver;
+import org.example.Model.MazeSolver.RecursiveBasic;
 import org.example.Observ.Observable;
 
 import java.util.ArrayList;
@@ -102,6 +103,7 @@ public class Maze extends Observable<Message> {
     static public List<MazeGenerator> getAllGenerators(){
         List<MazeGenerator> generatorList = new ArrayList<>();
 
+        // Add all implemented generators
         generatorList.add(new IterativeBacktracking());
         generatorList.add(new RandomizedPrim());
         generatorList.add(new RecursiveDivision());
@@ -111,7 +113,8 @@ public class Maze extends Observable<Message> {
     static public List<MazeSolver> getAllSolvers(){
         List<MazeSolver> solverList = new ArrayList<>();
 
-        // Add all solver when implemented
+        // Add all implemented solvers
+        solverList.add(new RecursiveBasic());
 
         return solverList;
     }

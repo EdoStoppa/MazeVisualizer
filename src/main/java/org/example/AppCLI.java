@@ -67,6 +67,34 @@ public class AppCLI
                 return;
             }
 
+            System.out.println("\nPlease, write any of these numbers to select the solver Algorithm");
+            for(int i=0; i<solversList.size(); i++){
+                System.out.println(i + ") " + generatorsList.get(i).toString());
+            }
+
+            while(true){
+                try{
+                    input = in.nextLine();
+                    if(Integer.parseInt(input) >= 0 && Integer.parseInt(input) < solversList.size()){
+                        break;
+                    } else {
+                        System.out.println("Sorry, invalid choice, please try again!");
+                    }
+                } catch (NoSuchElementException | IllegalStateException e){
+                    System.err.println("Error in getting input");
+                    System.out.println("Invalid input, please try again!");
+                }
+            }
+
+            model.solveMaze(solversList.get(Integer.parseInt(input)));
+            try {
+                model.getCurrentThread().join();
+            } catch(InterruptedException e){
+                System.err.println("Problem while waiting for end of maze solution");
+                System.out.println("\n\nSomething very bad happened, please restart the App!\n\n");
+                return;
+            }
+
             System.out.println("\nThanks for using this App, if you want to generate another maze please type \"new\"!");
             System.out.println("To close the App please type \"exit\".");
             input = in.nextLine();
