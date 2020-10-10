@@ -18,7 +18,8 @@ public class AppCLI
 {
     public static void main( String[] args ) {
         Scanner in = new Scanner(System.in);
-        String input;
+        int input;
+        String end;
 
         View view = new View();
         Model model = new Model(view);
@@ -36,81 +37,73 @@ public class AppCLI
                 System.out.println(i + ") " + generatorsList.get(i).toString());
             }
 
-            while(true){
-                try{
-                    input = in.nextLine();
-                    if(Integer.parseInt(input) >= 0 && Integer.parseInt(input) < generatorsList.size()){
-                        break;
-                    } else {
-                        System.out.println("Sorry, invalid choice, please try again!");
-                    }
-                } catch (NoSuchElementException | IllegalStateException e){
-                    System.err.println("Error in getting input");
-                    System.out.println("Invalid input, please try again!");
-                }
-            }
+            input = getNumInput(in, generatorsList.size());
+            model.createMaze(15, generatorsList.get(input));
 
-            System.out.println("\nThanks you for your choice, generating the maze...");
-            try{
-                Thread.sleep(1000);
-            } catch(IllegalArgumentException | InterruptedException e) {
-                System.err.println("Something went wrong while trying to sleep");
+            if(waitComputation(model))
                 return;
-            }
-
-            model.createMaze(15, generatorsList.get(Integer.parseInt(input)));
-            try {
-                model.getCurrentThread().join();
-            } catch(InterruptedException e){
-                System.err.println("Problem while waiting for end of maze generation");
-                System.out.println("\n\nSomething very bad happened, please restart the App!\n\n");
-                return;
-            }
 
             System.out.println("\nPlease, write any of these numbers to select the solver Algorithm");
             for(int i=0; i<solversList.size(); i++){
                 System.out.println(i + ") " + generatorsList.get(i).toString());
             }
 
-            while(true){
-                try{
-                    input = in.nextLine();
-                    if(Integer.parseInt(input) >= 0 && Integer.parseInt(input) < solversList.size()){
-                        break;
-                    } else {
-                        System.out.println("Sorry, invalid choice, please try again!");
-                    }
-                } catch (NoSuchElementException | IllegalStateException e){
-                    System.err.println("Error in getting input");
-                    System.out.println("Invalid input, please try again!");
-                }
-            }
+            input = getNumInput(in, solversList.size());
+            model.solveMaze(solversList.get(input));
 
-            model.solveMaze(solversList.get(Integer.parseInt(input)));
-            try {
-                model.getCurrentThread().join();
-            } catch(InterruptedException e){
-                System.err.println("Problem while waiting for end of maze solution");
-                System.out.println("\n\nSomething very bad happened, please restart the App!\n\n");
+            if(waitComputation(model))
                 return;
-            }
 
-            System.out.println("\nThanks for using this App, if you want to generate another maze please type \"new\"!");
-            System.out.println("To close the App please type \"exit\".");
-            input = in.nextLine();
+            System.out.println("\nThanks for using this App, if you want to generate another maze please type \"n\"!");
+            System.out.println("To quit the App please type \"q\".");
+            end = in.nextLine();
             while(true){
-                if(input.equals("exit"))
+                if(end.equals("q"))
                     return;
 
-                if(input.equals("new"))
+                if(end.equals("n"))
                     break;
                 System.out.println("Please make a valid choice...");
-                input = in.nextLine();
+                end = in.nextLine();
             }
         }
 
     }
 
+    // ---------------    Helper methods used to clean main    ---------------
+    static int getNumInput(Scanner in, int length){
+        String input;
+
+        while(true){
+            try{
+                input = in.nextLine();
+                if(Integer.parseInt(input) >= 0 && Integer.parseInt(input) < length){
+                    break;
+                } else {
+                    System.out.println("Sorry, invalid choice, please try again!");
+                }
+            } catch (NoSuchElementException | IllegalStateException e){
+                System.err.println("Error in getting input");
+                System.out.println("Invalid input, please try again!");
+            }
+        }
+
+        return Integer.parseInt(input);
+    }
+    static boolean waitComputation(Model model){
+        //method returns true if something bad happen
+        try {
+            model.getCurrentThread().join();
+        } catch(InterruptedException e){
+            System.err.println("Problem while waiting for end of maze generation");
+            System.out.println("\n\nSomething very bad happened, please restart the App!\n\n");
+            return true;
+        }
+
+        return false;
+    }
+
+    // ---------------    Miscellaneous    ---------------
     private static String intro(){
         return " __  __            __      ___                 _ _              \n" +
                 "|  \\/  |           \\ \\    / (_)               | (_)             \n" +
