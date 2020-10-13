@@ -10,8 +10,16 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-/**
- * Hello world!
+/*
+ * MazeVisualizer!
+ *
+ * This project is a sort of toy project, aimed at learning different types of generation/solving algorithms, generally geared towards graphs.
+ *
+ * The app will be able to generate a maze (with length = width) with a dimension decided by the user (obviously between some constraints). The app will
+ * generate a maze through 4 different algorithms, each one showing a very different technique. Then it will solve it again using 3 or 4 different algorithms.
+ *
+ * I'll be implementing 2 different user interfaces, one using command line (commonly called CLI), and the other using a more traditional GUI (probably using
+ * Swing, because being a toy project I think it's better to suffer a little bit more creating the user interface, but gain a deeper knowledge about how GUI works).
  *
  */
 public class AppCLI
@@ -20,6 +28,7 @@ public class AppCLI
         Scanner in = new Scanner(System.in);
         int input;
         String end;
+        int dim;
 
         View view = new View();
         Model model = new Model(view);
@@ -32,13 +41,16 @@ public class AppCLI
         System.out.println("In this App you'll be able to generate and solve mazes using multiple algorithms!");
 
         while(true){
+            System.out.println("\nPlease, choose the maze's dimension! (max dimension: 30, min dimension: 8)");
+            dim = getNumInput(in, 8,30);
+
             System.out.println("\nPlease, write any of these numbers to select the generator Algorithm");
             for(int i=0; i<generatorsList.size(); i++){
                 System.out.println(i + ") " + generatorsList.get(i).toString());
             }
 
-            input = getNumInput(in, generatorsList.size());
-            model.createMaze(15, generatorsList.get(input));
+            input = getNumInput(in, 0, generatorsList.size());
+            model.createMaze(dim, generatorsList.get(input));
 
             if(waitComputation(model))
                 return;
@@ -48,7 +60,7 @@ public class AppCLI
                 System.out.println(i + ") " + generatorsList.get(i).toString());
             }
 
-            input = getNumInput(in, solversList.size());
+            input = getNumInput(in, 0, solversList.size());
             model.solveMaze(solversList.get(input));
 
             if(waitComputation(model))
@@ -71,13 +83,13 @@ public class AppCLI
     }
 
     // ---------------    Helper methods used to clean main    ---------------
-    static int getNumInput(Scanner in, int length){
+    static int getNumInput(Scanner in, int min, int max){
         String input;
 
         while(true){
             try{
                 input = in.nextLine();
-                if(Integer.parseInt(input) >= 0 && Integer.parseInt(input) < length){
+                if(Integer.parseInt(input) >= min && Integer.parseInt(input) < max){
                     break;
                 } else {
                     System.out.println("Sorry, invalid choice, please try again!");
