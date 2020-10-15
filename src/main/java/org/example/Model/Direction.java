@@ -2,6 +2,7 @@ package org.example.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public enum Direction {
     UP(0, new Position(-1,0), "UP"),
@@ -46,6 +47,16 @@ public enum Direction {
                 return Direction.UP;
         }
     }
+    public static List<Direction> getAllDir(){
+        List<Direction> list = new ArrayList<>();
+
+        list.add(Direction.UP);
+        list.add(Direction.DOWN);
+        list.add(Direction.RIGHT);
+        list.add(Direction.LEFT);
+
+        return list;
+    }
     public static Direction nextDir(Direction dir){
         switch(dir){
             case UP:
@@ -75,5 +86,8 @@ public enum Direction {
                 return UP ;
         }
 
+    }
+    public static Direction nextDirRand(List<Direction> dir){
+        return dir.get((new Random()).nextInt(dir.size()));
     }
 }

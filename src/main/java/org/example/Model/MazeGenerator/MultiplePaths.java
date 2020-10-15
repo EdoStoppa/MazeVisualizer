@@ -7,6 +7,7 @@ import org.example.Model.Position;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class MultiplePaths implements MazeGenerator{
@@ -56,15 +57,16 @@ public class MultiplePaths implements MazeGenerator{
         Position cur, next;
         ArrayList<Position> listPos;
         Direction dir;
-        boolean clockwise, flag = true;
+        boolean flag = true;
+        List<Direction> dirList;
 
         listPos = new ArrayList<>(searchSet.values());
 
         // Try to find a new position to add in the searchSet, until something is found or no position is available
         while(!listPos.isEmpty() && flag){
-            clockwise = rand.nextBoolean();
+            dirList = Direction.getAllDir();                     // Get all direction to ensure randomness
             cur = listPos.get(rand.nextInt(listPos.size()));     // Extract a random cell in the searchSet
-            dir = Direction.getDir(rand.nextInt(4));        // Decided the first direction to check
+            dir = Direction.getDir(rand.nextInt(4));      // Decided the first direction to check
             next = cur.add(dir.getVector()); // got the first new position to check
 
             // if the position isn't in the searchSet (the same as the cur) and it isn't in the checkSet (the "enemy" set)
@@ -85,10 +87,8 @@ public class MultiplePaths implements MazeGenerator{
                 }
 
                 // these are useful only if the next pos isn't good
-                if(clockwise)
-                    dir = Direction.nextDir(dir);
-                else
-                    dir = Direction.nextDirOpposite(dir);
+                dir = Direction.nextDirRand(dirList);
+                dirList.remove(dir);
                 next = cur.add(dir.getVector());
             }
 
