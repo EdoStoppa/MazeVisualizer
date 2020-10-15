@@ -4,10 +4,7 @@ import org.example.Message.Message;
 import org.example.Message.Move;
 import org.example.Message.Visited;
 import org.example.Message.WallBreak;
-import org.example.Model.MazeGenerator.IterativeBacktracking;
-import org.example.Model.MazeGenerator.MazeGenerator;
-import org.example.Model.MazeGenerator.RandomizedPrim;
-import org.example.Model.MazeGenerator.RecursiveDivision;
+import org.example.Model.MazeGenerator.*;
 import org.example.Model.MazeSolver.MazeSolver;
 import org.example.Model.MazeSolver.RecursiveBasic;
 import org.example.Observ.Observable;
@@ -107,6 +104,7 @@ public class Maze extends Observable<Message> {
         generatorList.add(new IterativeBacktracking());
         generatorList.add(new RandomizedPrim());
         generatorList.add(new RecursiveDivision());
+        generatorList.add(new MultiplePaths());
 
         return generatorList;
     }

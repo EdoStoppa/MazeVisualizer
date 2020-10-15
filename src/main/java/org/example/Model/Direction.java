@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Direction {
-    UP(0, new Position(-1,0)),
-    RIGHT(1, new Position(0,1)),
-    DOWN(2, new Position(1,0)),
-    LEFT(3, new Position(0,-1));
+    UP(0, new Position(-1,0), "UP"),
+    RIGHT(1, new Position(0,1), "RIGHT"),
+    DOWN(2, new Position(1,0), "DOWN"),
+    LEFT(3, new Position(0,-1), "LEFT");
 
     private final int directionInt;
     private final Position vector;
+    private final String name;
 
-    Direction(int dir, Position vec){
+    Direction(int dir, Position vec, String name){
         directionInt = dir;
         vector = vec;
+        this.name = name;
     }
 
     public int getDirectionInt(){
@@ -25,6 +27,9 @@ public enum Direction {
     }
     public Position getVector(){
         return vector.clone();
+    }
+    public String toString(){
+        return name;
     }
 
     public static Direction getDir(int i){
@@ -51,6 +56,21 @@ public enum Direction {
                 return Direction.LEFT;
             case LEFT:
                 return Direction.UP;
+            default:
+                return UP ;
+        }
+
+    }
+    public static Direction nextDirOpposite(Direction dir){
+        switch(dir){
+            case UP:
+                return Direction.LEFT;
+            case RIGHT:
+                return Direction.UP;
+            case DOWN:
+                return Direction.RIGHT;
+            case LEFT:
+                return Direction.DOWN;
             default:
                 return UP ;
         }

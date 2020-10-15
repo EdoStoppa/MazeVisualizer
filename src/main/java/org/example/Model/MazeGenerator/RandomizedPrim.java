@@ -23,36 +23,13 @@ import java.util.Random;
  *       - Remove the wall from the list
  */
 public class RandomizedPrim implements MazeGenerator{
-    /*
-    * Private class needed to store all the walls in a list structure
-    * */
-    private class Wall{
-        final Position cellPos;
-        final Direction wallDir;
-
-        public Wall(Position cellPos, Direction wallDir){
-            this.cellPos = cellPos;
-            this.wallDir = wallDir;
-        }
-
-        public Position getCellPos() {
-            return this.cellPos;
-        }
-        public Position getAdjacentCellPos() {
-            return cellPos.add(wallDir.getVector());
-        }
-        public Direction getWallDir() {
-            return this.wallDir;
-        }
-    }
-
 
     @Override
     public void generateMaze(Model model, Maze maze) {
-        List<Wall> wallList = new ArrayList<>();
+        List<WallOpt> wallList = new ArrayList<>();
         Random rand = new Random();
         Position nextPos, curPos = new Position(rand.nextInt(maze.getDimension()), rand.nextInt(maze.getDimension()));
-        Wall pickedWall;
+        WallOpt pickedWall;
         maze.setCellAsVisited(curPos);
         addWalls(maze, curPos, wallList);
 
@@ -87,10 +64,10 @@ public class RandomizedPrim implements MazeGenerator{
         return "Randomized Prim's Algorithm";
     }
 
-    public void addWalls(Maze m, Position p, List<Wall> list){
+    public void addWalls(Maze m, Position p, List<WallOpt> list){
         for(int i=0; i<4; i++){
             if(!m.canMoveTo(p, Direction.getDir(i)))
-                list.add(new Wall(p, Direction.getDir(i)));
+                list.add(new WallOpt(p, Direction.getDir(i)));
         }
 
     }
