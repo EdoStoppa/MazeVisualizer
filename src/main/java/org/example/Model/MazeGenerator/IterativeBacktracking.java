@@ -5,6 +5,8 @@ import org.example.Model.Maze;
 import org.example.Model.Model;
 import org.example.Model.Position;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
@@ -59,23 +61,13 @@ public class IterativeBacktracking implements MazeGenerator {
         maze.print();
     }
 
-    @Override
-    public boolean wallSetup() {
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Iterative Backtracking Algorithm";
-    }
-
     private Direction getNextDir(Maze maze) {
         Position curPos, nextPos;
         Direction nextDir;
+        List<Direction> dirList = new ArrayList<>(Direction.getAllDir());
         Random rand = new Random();
 
-        curPos = maze.getCurPos();
-        nextDir = Direction.getDir(rand.nextInt(4));
+        nextDir = dirList.get(rand.nextInt(dirList.size()));
 
         for(int start=0; start<4; start++){
             curPos = maze.getCurPos();
@@ -88,9 +80,22 @@ public class IterativeBacktracking implements MazeGenerator {
 
             }
 
-            nextDir = Direction.nextDir(nextDir);
+            dirList.remove(nextDir);
+            if(!dirList.isEmpty())
+                nextDir = Direction.nextDirRand(dirList);
         }
 
         return null;
     }
+
+    @Override
+    public boolean wallSetup() {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Iterative Backtracking Algorithm";
+    }
+
 }

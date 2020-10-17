@@ -72,21 +72,6 @@ public enum Direction {
         }
 
     }
-    public static Direction nextDirOpposite(Direction dir){
-        switch(dir){
-            case UP:
-                return Direction.LEFT;
-            case RIGHT:
-                return Direction.UP;
-            case DOWN:
-                return Direction.RIGHT;
-            case LEFT:
-                return Direction.DOWN;
-            default:
-                return UP ;
-        }
-
-    }
     public static Direction nextDirRand(List<Direction> dir){
         return dir.get((new Random()).nextInt(dir.size()));
     }
