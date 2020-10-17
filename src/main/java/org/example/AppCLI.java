@@ -57,7 +57,7 @@ public class AppCLI
 
             System.out.println("\nPlease, write any of these numbers to select the solver Algorithm");
             for(int i=0; i<solversList.size(); i++){
-                System.out.println(i + ") " + generatorsList.get(i).toString());
+                System.out.println(i + ") " + solversList.get(i).toString());
             }
 
             input = getNumInput(in, 0, solversList.size());

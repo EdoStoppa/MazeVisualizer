@@ -51,8 +51,8 @@ public enum Direction {
         List<Direction> list = new ArrayList<>();
 
         list.add(Direction.UP);
-        list.add(Direction.DOWN);
         list.add(Direction.RIGHT);
+        list.add(Direction.DOWN);
         list.add(Direction.LEFT);
 
         return list;

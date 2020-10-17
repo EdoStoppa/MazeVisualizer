@@ -24,7 +24,7 @@ public class Position {
     }
 
     public boolean equals(Position p){
-        return (posX==p.getPosX() && posY==getPosY());
+        return (posX==p.getPosX() && posY==p.getPosY());
     }
     public String toString(){
         return this.posX + "," + this.posY;
