@@ -58,7 +58,6 @@ public class IterativeBacktracking implements MazeGenerator {
         }
 
         maze.createStartEnd();
-        maze.print();
     }
 
     private Direction getNextDir(Maze maze) {

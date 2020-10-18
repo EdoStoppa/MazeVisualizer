@@ -26,6 +26,7 @@ public class Model extends Observable<Message> implements Observer<Message> {
         maze.addObserver(this);
         this.currentThread = new Thread(() ->{
             generator.generateMaze(this, this.maze);
+            maze.print();
         });
         currentThread.start();
     }

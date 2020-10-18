@@ -13,6 +13,7 @@ import java.util.Random;
 public class MultiplePaths implements MazeGenerator{
     @Override
     public void generateMaze(Model model, Maze maze) {
+
         int dimension = maze.getDimension();
         HashMap<String, Position> startSet = new HashMap<>(), goalSet = new HashMap<>();
         HashMap<String, WallOpt> mixedSet = new HashMap<>();
@@ -22,21 +23,20 @@ public class MultiplePaths implements MazeGenerator{
         WallOpt wall;
         int endCounter = dimension*dimension - 2;
 
-        pos = new Position(0,0);
+        pos = new Position(rand.nextInt(maze.getDimension()),rand.nextInt(maze.getDimension()));
         maze.setCellAsVisited(pos);
         startSet.put(pos.toString(), pos);
 
-        pos = new Position(dimension-1, dimension-1);
+        pos = new Position(rand.nextInt(maze.getDimension()), rand.nextInt(maze.getDimension()));
         maze.setCellAsVisited(pos);
         goalSet.put(pos.toString(), pos);
 
         while(endCounter > 0){
-            addNewPos(maze, startSet, goalSet, mixedSet);
-            endCounter--;
+            if(!addNewPos(maze, startSet, goalSet, mixedSet))
+                endCounter--;
 
-            if(endCounter > 0)
-                addNewPos(maze, goalSet, startSet, mixedSet);
-            endCounter--;
+            if(!addNewPos(maze, goalSet, startSet, mixedSet))
+                endCounter--;
         }
 
         // The two sets are created, now it' time to add multiple path
@@ -49,21 +49,20 @@ public class MultiplePaths implements MazeGenerator{
         }
 
         maze.createStartEnd();
-        maze.print();
     }
 
-    private void addNewPos(Maze maze, HashMap<String, Position> searchSet, HashMap<String, Position> checkSet, HashMap<String, WallOpt> mixed){
+    private boolean addNewPos(Maze maze, HashMap<String, Position> searchSet, HashMap<String, Position> checkSet, HashMap<String, WallOpt> mixed){
         Random rand = new Random();
         Position cur, next;
         ArrayList<Position> listPos;
         Direction dir;
-        boolean flag = true;
+        boolean searching = true;
         List<Direction> dirList;
 
         listPos = new ArrayList<>(searchSet.values());
 
         // Try to find a new position to add in the searchSet, until something is found or no position is available
-        while(!listPos.isEmpty() && flag){
+        while(!listPos.isEmpty() && searching){
             dirList = Direction.getAllDir();                     // Get all direction to ensure randomness
             cur = listPos.get(rand.nextInt(listPos.size()));     // Extract a random cell in the searchSet
             dir = Direction.getDir(rand.nextInt(4));      // Decided the first direction to check
@@ -79,7 +78,7 @@ public class MultiplePaths implements MazeGenerator{
                             maze.breakWalls(cur, dir);
                             maze.setCellAsVisited(next);
                             searchSet.put(next.toString(), next);
-                            flag = false;
+                            searching = false;
                             addBorder(next, checkSet, mixed);
                             break;
                         }
@@ -97,6 +96,8 @@ public class MultiplePaths implements MazeGenerator{
             listPos.remove(cur);
 
         }
+
+        return searching;
 
     }
 

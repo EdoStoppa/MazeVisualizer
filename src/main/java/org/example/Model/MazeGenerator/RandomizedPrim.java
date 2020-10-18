@@ -51,7 +51,6 @@ public class RandomizedPrim implements MazeGenerator{
         }
 
         maze.createStartEnd();
-        maze.print();
     }
 
     @Override
