@@ -2,7 +2,6 @@ package org.example.Model.MazeGenerator;
 
 import org.example.Model.Direction;
 import org.example.Model.Maze;
-import org.example.Model.Model;
 import org.example.Model.Position;
 
 import java.util.ArrayList;
@@ -10,6 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+
+/*
+* Algorithm's high-level description (thanks to "tobias_k" on StackOverflow: https://stackoverflow.com/questions/22305644/how-to-generate-a-maze-with-more-than-one-successful-path)
+*
+* Multiple paths generation Algorithm:
+*
+* - Starting with an empty maze, with just the start and the goal (decided randomly)
+* - Subdivide the maze into three sets: Start (initially holding just the start cell), goal (initially holding just the goal cell), and undiscovered (all the rest, implicit in this implementation)
+* - Repeat until each cell is either in the start or the goal set:
+*       - Randomly remove walls between cells in the start or the goal set and cells in the undiscovered set, and move the newly discovered cell to the respective set.
+* - Remove as many walls between the two regions as you want paths from the start to the goal
+*/
 public class MultiplePaths implements MazeGenerator{
     @Override
     public void generateMaze(Maze maze) {

@@ -30,9 +30,8 @@ public class IterativeBacktracking implements MazeGenerator {
     public void generateMaze(Maze maze){
         Stack<Position> stackPos = new Stack<>();
         Direction nextDir;
-        Position p = new Position(0,0);
+        Position p = maze.getStart().clone();
         maze.setCellAsVisited(p);
-        //maze.setCurPos(p);
         stackPos.push(p);
 
         while(!stackPos.empty()){
@@ -46,8 +45,6 @@ public class IterativeBacktracking implements MazeGenerator {
             } else {
                 p = stackPos.pop();
             }
-            
-            //maze.setCurPos(p);
         }
 
         maze.createStartEnd();

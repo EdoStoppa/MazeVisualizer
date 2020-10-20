@@ -58,8 +58,6 @@ public class BreadthFirstSearch implements MazeSolver{
 
     }
 
-
-
     @Override
     public String toString(){
         return "Breadth-first Search Solver";

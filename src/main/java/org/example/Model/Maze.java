@@ -1,7 +1,6 @@
 package org.example.Model;
 
 import org.example.Message.Message;
-import org.example.Message.Move;
 import org.example.Message.Visited;
 import org.example.Message.WallBreak;
 import org.example.Model.MazeGenerator.*;
@@ -17,10 +16,13 @@ import java.util.List;
 public class Maze extends Observable<Message> {
     private final Cell[][] maze;
     private final int dimension;
+    private Position start, goal;
     private List<Position> solution;
 
     public Maze(int dimension, boolean isWallsUp){
         this.dimension = dimension;
+        this.start = new Position(0,0);
+        this.goal = new Position(dimension-1, dimension-1);
         this.maze = new Cell[dimension][dimension];
         this.solution = null;
 
@@ -44,6 +46,18 @@ public class Maze extends Observable<Message> {
     public void createStartEnd(){
         maze[0][0].breakWall(Direction.UP.getDirectionInt());
         maze[dimension-1][dimension-1].breakWall(Direction.UP.getDirectionInt());
+    }
+    public Position getStart() {
+        return this.start.clone();
+    }
+    public Position getGoal() {
+        return this.goal.clone();
+    }
+    public void setStart(Position p) {
+        this.start = p.clone();
+    }
+    public void setGoal(Position p) {
+        this.goal = p.clone();
     }
 
     //----------- Methods used to interacts with a maze's cell given the position and/or movement direction -----------

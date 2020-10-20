@@ -1,7 +1,6 @@
 package org.example.Model;
 
 import org.example.Message.Message;
-import org.example.Message.Move;
 import org.example.Observ.Observer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,7 +76,6 @@ class MazeTest {
             assertEquals(!m.canMoveTo(p4, Direction.DOWN), k == m.getDimension()-1, "The wall should be at value: " + (m.getDimension()-1));
         }
     }
-
 
     @Test
     void canMoveToGeneral(){
