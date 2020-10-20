@@ -30,7 +30,8 @@ public class Model extends Observable<Message> implements Observer<Message> {
     }
     public void solveMaze(MazeSolver solver){
         this.currentThread = new Thread(() ->{
-            solver.solveMaze(this, this.maze);
+            solver.solveMaze(this.maze);
+            maze.print();
         });
         currentThread.start();
     }

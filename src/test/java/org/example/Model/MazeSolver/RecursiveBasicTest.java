@@ -27,7 +27,7 @@ class RecursiveBasicTest {
 
         gen.generateMaze(maze);
         maze.resetMazeVisited();
-        solver.solveMaze(m, maze);
+        solver.solveMaze(maze);
         List<Position> sol = maze.getSolution();
         System.out.println(sol.size());
         for(Position p : sol){
