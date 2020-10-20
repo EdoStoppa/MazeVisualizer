@@ -78,43 +78,37 @@ class MazeTest {
         }
     }
 
-    @Test
-    void setCurPosBasic(){
-        assertTrue(m.getCurPos().equals(new Position(0,0)), "The starting position is initialized incorrectly");
-
-        m.setCurPos(new Position(1,1));
-        assertTrue(m.getCurPos().equals(new Position(1,1)), "The position should be changed");
-        assertTrue(((Move)r.getMessage()).getOldPos().equals(new Position(0,0)), "The oldPos received should be the initial pos");
-        assertTrue(((Move)r.getMessage()).getNewPos().equals(new Position(1,1)), "The newPos received should be the actual pos");
-        assertFalse(((Move) r.getMessage()).getWasVisited(), "The new cell shouldn't be visited");
-    }
 
     @Test
     void canMoveToGeneral(){
-        m.setCurPos(new Position(0,0));
-        checkWalls(m.getCurPos(), true);
+        Position p;
 
-        m.setCurPos(new Position(0, m.getDimension()-1));
-        checkWalls(m.getCurPos(), true);
+        p = new Position(0,0);
+        checkWalls(p, true);
 
-        m.setCurPos(new Position(m.getDimension()-1, 0));
-        checkWalls(m.getCurPos(), true);
+        p = new Position(0, m.getDimension()-1);
+        checkWalls(p, true);
 
-        m.setCurPos(new Position(m.getDimension()-1, m.getDimension()-1));
-        checkWalls(m.getCurPos(), true);
+        p = new Position(m.getDimension()-1, 0);
+        checkWalls(p, true);
 
-        m.setCurPos(new Position(3, 5));
-        checkWalls(m.getCurPos(), true);
+        p = new Position(m.getDimension()-1, m.getDimension()-1);
+        checkWalls(p, true);
+
+        p = new Position(3, 5);
+        checkWalls(p, true);
     }
 
     @Test
     void breakWallsBasic(){
-        Position currPos = m.getCurPos();
+        Position currPos = new Position(0,0);
         m.breakWalls(currPos, Direction.DOWN);
 
         assertTrue(m.canMoveTo(currPos, Direction.DOWN), "This wall should be broken");
-        m.setCurPos(currPos.add(Direction.DOWN.getVector()));
-        assertTrue(m.canMoveTo(m.getCurPos(), Direction.UP), "This wall should be broken");
+
+        currPos = currPos.add(Direction.DOWN.getVector());
+
+        assertTrue(m.canMoveTo(currPos, Direction.UP), "This wall should be broken");
     }
 
     void checkWalls(Position p, boolean up){

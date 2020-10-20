@@ -19,7 +19,7 @@ import java.util.Random;
  */
 public class RecursiveDivision implements MazeGenerator{
     @Override
-    public void generateMaze(Model model, Maze maze) {
+    public void generateMaze(Maze maze) {
 
         recursiveGeneration(new Position(0,0), new Position(maze.getDimension()-1, maze.getDimension()-1), maze);
 

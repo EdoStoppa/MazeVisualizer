@@ -27,41 +27,34 @@ import java.util.Stack;
 public class IterativeBacktracking implements MazeGenerator {
 
     @Override
-    public void generateMaze(Model model, Maze maze){
+    public void generateMaze(Maze maze){
         Stack<Position> stackPos = new Stack<>();
         Direction nextDir;
         Position p = new Position(0,0);
         maze.setCellAsVisited(p);
-        maze.setCurPos(p);
-        stackPos.push(maze.getCurPos());
+        //maze.setCurPos(p);
+        stackPos.push(p);
 
         while(!stackPos.empty()){
-            if(model.getDelay() > 0){
-                try{
-                    Thread.sleep(model.getDelay());
-                } catch(IllegalArgumentException | InterruptedException e){
-                    System.err.println("Something went wrong in the sleep");
-                }
-            }
 
-            nextDir = getNextDir(maze);
+            nextDir = getNextDir(maze, p);
             if(nextDir != null){
-                stackPos.push(maze.getCurPos());
-                maze.breakWalls(maze.getCurPos(), nextDir);
-                p = maze.getCurPos().add(nextDir.getVector());
+                stackPos.push(p);
+                maze.breakWalls(p, nextDir);
+                p = p.add(nextDir.getVector());
                 maze.setCellAsVisited(p);
             } else {
                 p = stackPos.pop();
             }
             
-            maze.setCurPos(p);
+            //maze.setCurPos(p);
         }
 
         maze.createStartEnd();
     }
 
-    private Direction getNextDir(Maze maze) {
-        Position curPos, nextPos;
+    private Direction getNextDir(Maze maze, Position pos) {
+        Position nextPos;
         Direction nextDir;
         List<Direction> dirList = new ArrayList<>(Direction.getAllDir());
         Random rand = new Random();
@@ -69,8 +62,7 @@ public class IterativeBacktracking implements MazeGenerator {
         nextDir = dirList.get(rand.nextInt(dirList.size()));
 
         for(int start=0; start<4; start++){
-            curPos = maze.getCurPos();
-            nextPos = curPos.add(nextDir.getVector());
+            nextPos = pos.add(nextDir.getVector());
 
             if(maze.isAcceptablePos(nextPos)){
                 if(!maze.cellWasVisited(nextPos)){

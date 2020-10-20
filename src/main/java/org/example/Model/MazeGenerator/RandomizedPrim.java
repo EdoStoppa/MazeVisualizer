@@ -25,7 +25,7 @@ import java.util.Random;
 public class RandomizedPrim implements MazeGenerator{
 
     @Override
-    public void generateMaze(Model model, Maze maze) {
+    public void generateMaze(Maze maze) {
         List<WallOpt> wallList = new ArrayList<>();
         Random rand = new Random();
         Position nextPos, curPos = new Position(rand.nextInt(maze.getDimension()), rand.nextInt(maze.getDimension()));

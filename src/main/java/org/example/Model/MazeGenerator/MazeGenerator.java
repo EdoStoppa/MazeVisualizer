@@ -5,7 +5,7 @@ import org.example.Model.Maze;
 import org.example.Model.Model;
 
 public interface MazeGenerator {
-    void generateMaze(Model model, Maze maze);
+    void generateMaze(Maze maze);
     boolean wallSetup();
     String toString();
 }

@@ -94,7 +94,7 @@ public class AppCLI
                 } else {
                     System.out.println("Sorry, invalid choice, please try again!");
                 }
-            } catch (NoSuchElementException | IllegalStateException e){
+            } catch (NoSuchElementException | IllegalStateException | NumberFormatException e){
                 System.err.println("Error in getting input");
                 System.out.println("Invalid input, please try again!");
             }

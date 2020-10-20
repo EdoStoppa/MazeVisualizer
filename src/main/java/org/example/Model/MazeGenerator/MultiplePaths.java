@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class MultiplePaths implements MazeGenerator{
     @Override
-    public void generateMaze(Model model, Maze maze) {
+    public void generateMaze(Maze maze) {
 
         int dimension = maze.getDimension();
         HashMap<String, Position> startSet = new HashMap<>(), goalSet = new HashMap<>();
@@ -32,10 +32,10 @@ public class MultiplePaths implements MazeGenerator{
         goalSet.put(pos.toString(), pos);
 
         while(endCounter > 0){
-            if(!addNewPos(maze, startSet, goalSet, mixedSet))
+            if(addNewPos(maze, startSet, goalSet, mixedSet))
                 endCounter--;
 
-            if(!addNewPos(maze, goalSet, startSet, mixedSet))
+            if(addNewPos(maze, goalSet, startSet, mixedSet))
                 endCounter--;
         }
 
@@ -56,13 +56,13 @@ public class MultiplePaths implements MazeGenerator{
         Position cur, next;
         ArrayList<Position> listPos;
         Direction dir;
-        boolean searching = true;
+        boolean found = false;
         List<Direction> dirList;
 
         listPos = new ArrayList<>(searchSet.values());
 
         // Try to find a new position to add in the searchSet, until something is found or no position is available
-        while(!listPos.isEmpty() && searching){
+        while(!listPos.isEmpty() && !found){
             dirList = Direction.getAllDir();                     // Get all direction to ensure randomness
             cur = listPos.get(rand.nextInt(listPos.size()));     // Extract a random cell in the searchSet
             dir = Direction.getDir(rand.nextInt(4));      // Decided the first direction to check
@@ -78,7 +78,7 @@ public class MultiplePaths implements MazeGenerator{
                             maze.breakWalls(cur, dir);
                             maze.setCellAsVisited(next);
                             searchSet.put(next.toString(), next);
-                            searching = false;
+                            found = true;
                             addBorder(next, checkSet, mixed);
                             break;
                         }
@@ -97,7 +97,7 @@ public class MultiplePaths implements MazeGenerator{
 
         }
 
-        return searching;
+        return found;
 
     }
 

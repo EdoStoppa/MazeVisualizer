@@ -14,10 +14,8 @@ public class Model extends Observable<Message> implements Observer<Message> {
     private Thread currentThread;
     private Maze maze;
     // This value represent the delay used to process every step to show on GUI all the maze generation procedurally
-    private int delay;
 
     public Model(View view){
-        this.delay = 0;
         addObserver(view);
     }
 
@@ -25,7 +23,7 @@ public class Model extends Observable<Message> implements Observer<Message> {
         this.maze = new Maze(dimension, generator.wallSetup());
         maze.addObserver(this);
         this.currentThread = new Thread(() ->{
-            generator.generateMaze(this, this.maze);
+            generator.generateMaze(this.maze);
             maze.print();
         });
         currentThread.start();
@@ -39,13 +37,6 @@ public class Model extends Observable<Message> implements Observer<Message> {
 
     public Thread getCurrentThread(){
         return currentThread;
-    }
-
-    public int getDelay(){
-        return delay;
-    }
-    public void setDelay(int delay){
-        this.delay = delay;
     }
 
     @Override

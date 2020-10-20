@@ -16,14 +16,12 @@ import java.util.List;
 
 public class Maze extends Observable<Message> {
     private final Cell[][] maze;
-    private Position curPos;
     private final int dimension;
     private List<Position> solution;
 
     public Maze(int dimension, boolean isWallsUp){
         this.dimension = dimension;
         this.maze = new Cell[dimension][dimension];
-        this.curPos = new Position(0,0);
         this.solution = null;
 
         for(int i=0; i<dimension; i++){
@@ -46,16 +44,6 @@ public class Maze extends Observable<Message> {
     public void createStartEnd(){
         maze[0][0].breakWall(Direction.UP.getDirectionInt());
         maze[dimension-1][dimension-1].breakWall(Direction.UP.getDirectionInt());
-    }
-
-    //----------- Methods used to interact with the cursor used to explore the maze -----------
-    public void setCurPos(Position p){
-        Position oldPos = curPos.clone();
-        this.curPos = p;
-        notify(new Move(oldPos, curPos, cellWasVisited(p.clone())));
-    }
-    public Position getCurPos(){
-        return this.curPos.clone();
     }
 
     //----------- Methods used to interacts with a maze's cell given the position and/or movement direction -----------
