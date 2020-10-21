@@ -16,7 +16,7 @@ import java.util.Scanner;
  * This project is a sort of toy project, aimed at learning different types of generation/solving algorithms, generally geared towards graphs.
  *
  * The app will be able to generate a maze (with length = width) with a dimension decided by the user (obviously between some constraints). The app will
- * generate a maze through 4 different algorithms, each one showing a very different technique. Then it will solve it again using 3 or 4 different algorithms.
+ * generate a maze through 5 different algorithms, each one showing a very different technique. Then it will solve it again using 3 or 4 different algorithms.
  *
  * I'll be implementing 2 different user interfaces, one using command line (commonly called CLI), and the other using a more traditional GUI (probably using
  * Swing, because being a toy project I think it's better to suffer a little bit more creating the user interface, but gain a deeper knowledge about how GUI works).
