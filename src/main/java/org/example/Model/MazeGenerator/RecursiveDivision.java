@@ -2,7 +2,6 @@ package org.example.Model.MazeGenerator;
 
 import org.example.Model.Direction;
 import org.example.Model.Maze;
-import org.example.Model.Model;
 import org.example.Model.Position;
 
 import java.util.Random;
@@ -21,9 +20,9 @@ public class RecursiveDivision implements MazeGenerator{
     @Override
     public void generateMaze(Maze maze) {
 
+        // Yes, that's all :)
         recursiveGeneration(new Position(0,0), new Position(maze.getDimension()-1, maze.getDimension()-1), maze);
 
-        maze.createStartEnd();
     }
 
     void recursiveGeneration(Position origin, Position bound, Maze maze){

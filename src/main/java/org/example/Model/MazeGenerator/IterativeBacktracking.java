@@ -2,7 +2,6 @@ package org.example.Model.MazeGenerator;
 
 import org.example.Model.Direction;
 import org.example.Model.Maze;
-import org.example.Model.Model;
 import org.example.Model.Position;
 
 import java.util.ArrayList;
@@ -47,7 +46,6 @@ public class IterativeBacktracking implements MazeGenerator {
             }
         }
 
-        maze.createStartEnd();
     }
 
     private Direction getNextDir(Maze maze, Position pos) {

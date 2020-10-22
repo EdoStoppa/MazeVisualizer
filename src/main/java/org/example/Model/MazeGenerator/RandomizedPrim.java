@@ -2,7 +2,6 @@ package org.example.Model.MazeGenerator;
 
 import org.example.Model.Direction;
 import org.example.Model.Maze;
-import org.example.Model.Model;
 import org.example.Model.Position;
 
 import java.util.ArrayList;
@@ -50,7 +49,6 @@ public class RandomizedPrim implements MazeGenerator{
 
         }
 
-        maze.createStartEnd();
     }
 
     @Override

@@ -108,6 +108,7 @@ public class Maze extends Observable<Message> {
         generatorList.add(new RandomizedPrim());
         generatorList.add(new RecursiveDivision());
         generatorList.add(new MultiplePaths());
+        generatorList.add(new EllerSets());
 
         return generatorList;
     }
