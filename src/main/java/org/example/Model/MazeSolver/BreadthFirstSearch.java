@@ -28,8 +28,8 @@ import java.util.List;
  *          - If the current position wasn't already visited:
  *              - For every direction possible:
  *                  - Explore the new cell and if it is acceptable (in the maze and not blocked by a wall):
- *                      - Add the new position as a node in the
- *              - Add the current cell in the queue
+ *                      - Add the new cell in the queue
+ *              - Set the current cell as visited
  * - The last element popped (cur) is the node containing the goal, so while cur isn't null:
  *      - Add to the solution path the current position
  *      - Set cur as the its father
