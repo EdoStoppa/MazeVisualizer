@@ -52,9 +52,6 @@ public class AppCLI
             input = getNumInput(in, 0, generatorsList.size());
             model.createMaze(dim, generatorsList.get(input));
 
-            if(waitComputation(model))
-                return;
-
             System.out.println("\nPlease, write any of these numbers to select the solver Algorithm");
             for(int i=0; i<solversList.size(); i++){
                 System.out.println(i + ") " + solversList.get(i).toString());
@@ -62,9 +59,6 @@ public class AppCLI
 
             input = getNumInput(in, 0, solversList.size());
             model.solveMaze(solversList.get(input));
-
-            if(waitComputation(model))
-                return;
 
             System.out.println("\nThanks for using this App, if you want to generate another maze please type \"n\"!");
             System.out.println("To quit the App please type \"q\".");
@@ -101,18 +95,6 @@ public class AppCLI
         }
 
         return Integer.parseInt(input);
-    }
-    static boolean waitComputation(Model model){
-        //method returns true if something bad happen
-        try {
-            model.getCurrentThread().join();
-        } catch(InterruptedException e){
-            System.err.println("Problem while waiting for end of maze generation");
-            System.out.println("\n\nSomething very bad happened, please restart the App!\n\n");
-            return true;
-        }
-
-        return false;
     }
 
     // ---------------    Miscellaneous    ---------------

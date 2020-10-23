@@ -11,7 +11,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Model extends Observable<Message> implements Observer<Message> {
-    private Thread currentThread;
     private Maze maze;
     // This value represent the delay used to process every step to show on GUI all the maze generation procedurally
 
@@ -19,25 +18,15 @@ public class Model extends Observable<Message> implements Observer<Message> {
         addObserver(view);
     }
 
-    public void createMaze(int dimension, MazeGenerator generator){
+    public void createMaze(int dimension, MazeGenerator generator) {
         this.maze = new Maze(dimension, generator.wallSetup());
         maze.addObserver(this);
-        this.currentThread = new Thread(() ->{
-            generator.generateMaze(this.maze);
-            maze.print();
-        });
-        currentThread.start();
+        generator.generateMaze(this.maze);
+        maze.print();
     }
     public void solveMaze(MazeSolver solver){
-        this.currentThread = new Thread(() ->{
-            solver.solveMaze(this.maze);
-            maze.print();
-        });
-        currentThread.start();
-    }
-
-    public Thread getCurrentThread(){
-        return currentThread;
+        solver.solveMaze(this.maze);
+        maze.print();
     }
 
     @Override
