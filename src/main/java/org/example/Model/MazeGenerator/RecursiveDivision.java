@@ -23,6 +23,8 @@ public class RecursiveDivision implements MazeGenerator{
         // Yes, that's all :)
         recursiveGeneration(new Position(0,0), new Position(maze.getDimension()-1, maze.getDimension()-1), maze);
 
+        maze.resetMazeVisited();
+
     }
 
     void recursiveGeneration(Position origin, Position bound, Maze maze){

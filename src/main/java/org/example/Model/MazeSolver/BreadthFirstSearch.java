@@ -38,16 +38,14 @@ import java.util.List;
 public class BreadthFirstSearch implements MazeSolver{
     @Override
     public void solveMaze(Maze maze) {
-        // Generate a spanning tree from  position (0,0). A cell is considered visited only if it was already expanded in the tree
-        Node cur=null, root = new Node(maze.getStart(), null);
-        Position curPos, nextPos, goal = new Position(maze.getDimension()-1, maze.getDimension()-1);
+        // Generate a spanning tree from start Position. A cell is considered visited only if it was already expanded in the tree
+        Node cur=null;
+        Position curPos, nextPos, goal = maze.getGoal();
         LinkedList<Node> nodeFifo = new LinkedList<>(); // used to implement a queue with FIFO policy
         List<Direction> dirList;
         List<Position> solution = new ArrayList<>();
 
-        maze.resetMazeVisited();
-
-        nodeFifo.addLast(root);
+        nodeFifo.addLast(new Node(maze.getStart(), null));
 
         // create the list of possible path to the end
         while(!nodeFifo.isEmpty()){
@@ -61,7 +59,7 @@ public class BreadthFirstSearch implements MazeSolver{
                     dirList = Direction.getAllDir();
                     for(Direction dir : dirList){
                         nextPos = curPos.add(dir.getVector());
-                        if(maze.isAcceptablePos(nextPos) && maze.canMoveTo(curPos, dir)){
+                        if(maze.isAcceptablePos(nextPos) && maze.canMoveTo(curPos, dir) && !maze.cellWasVisited(nextPos)){
                             nodeFifo.addLast(new Node(nextPos, cur));
                         }
                     }
@@ -76,6 +74,7 @@ public class BreadthFirstSearch implements MazeSolver{
             cur = cur.getFather();
         }
 
+        maze.resetMazeVisited();
         Collections.reverse(solution);
         maze.setSolution(solution);
     }

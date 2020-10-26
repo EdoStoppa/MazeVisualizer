@@ -52,8 +52,6 @@ public class AStar implements MazeSolver{
         List<Direction> dirList;
         LinkedList<Position> solution = new LinkedList<>();
 
-        maze.resetMazeVisited();
-
         nodeQueue.add(new Node(maze.getStart(), null, 0, manhattanDist(maze.getStart(), goal.clone())));
 
         while(!nodeQueue.isEmpty()){
@@ -81,6 +79,7 @@ public class AStar implements MazeSolver{
             cur = cur.getFather();
         }
 
+        maze.resetMazeVisited();
         maze.setSolution(solution);
     }
 

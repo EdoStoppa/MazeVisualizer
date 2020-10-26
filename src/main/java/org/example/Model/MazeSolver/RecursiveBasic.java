@@ -33,11 +33,11 @@ public class RecursiveBasic implements MazeSolver{
     @Override
     public void solveMaze(Maze maze) {
         List<Position> solution = new ArrayList<>();
-        maze.resetMazeVisited();
         recursiveSolve(maze, maze.getStart().clone(), maze.getGoal().clone(), solution);
 
         Collections.reverse(solution);
 
+        maze.resetMazeVisited();
         maze.setSolution(solution);
     }
 

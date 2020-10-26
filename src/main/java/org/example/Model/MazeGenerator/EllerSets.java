@@ -89,7 +89,6 @@ public class EllerSets implements MazeGenerator{
                 }
 
             }
-            maze.print();
         }
 
         // For the last row simply merge every couple of cell that are from different sets

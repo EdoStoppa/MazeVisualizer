@@ -4,10 +4,7 @@ import org.example.Message.Message;
 import org.example.Message.Visited;
 import org.example.Message.WallBreak;
 import org.example.Model.MazeGenerator.*;
-import org.example.Model.MazeSolver.AStar;
-import org.example.Model.MazeSolver.BreadthFirstSearch;
-import org.example.Model.MazeSolver.MazeSolver;
-import org.example.Model.MazeSolver.RecursiveBasic;
+import org.example.Model.MazeSolver.*;
 import org.example.Observ.Observable;
 
 import java.util.ArrayList;
@@ -120,6 +117,7 @@ public class Maze extends Observable<Message> {
         solverList.add(new RecursiveBasic());
         solverList.add(new BreadthFirstSearch());
         solverList.add(new AStar());
+        solverList.add(new BidirectionalSearch());
 
         return solverList;
     }

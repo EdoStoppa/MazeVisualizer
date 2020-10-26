@@ -46,6 +46,7 @@ public class IterativeBacktracking implements MazeGenerator {
             }
         }
 
+        maze.resetMazeVisited();
     }
 
     private Direction getNextDir(Maze maze, Position pos) {

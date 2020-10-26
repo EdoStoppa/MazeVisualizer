@@ -49,6 +49,8 @@ public class RandomizedPrim implements MazeGenerator{
 
         }
 
+        maze.resetMazeVisited();
+
     }
 
     @Override

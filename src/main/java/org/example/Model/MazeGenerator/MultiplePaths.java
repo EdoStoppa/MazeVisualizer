@@ -59,6 +59,8 @@ public class MultiplePaths implements MazeGenerator{
             keyList.remove(wallString);
         }
 
+        maze.resetMazeVisited();
+
     }
 
     private boolean addNewPos(Maze maze, HashMap<String, Position> searchSet, HashMap<String, Position> checkSet, HashMap<String, WallOpt> mixed){
