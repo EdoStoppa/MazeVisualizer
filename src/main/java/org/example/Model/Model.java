@@ -5,17 +5,14 @@ import org.example.Model.MazeGenerator.MazeGenerator;
 import org.example.Model.MazeSolver.MazeSolver;
 import org.example.Observ.Observable;
 import org.example.Observ.Observer;
-import org.example.View.View;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import org.example.View.Controller;
 
 public class Model extends Observable<Message> implements Observer<Message> {
     private Maze maze;
     // This value represent the delay used to process every step to show on GUI all the maze generation procedurally
 
-    public Model(View view){
-        addObserver(view);
+    public Model(Controller controller){
+        addObserver(controller);
     }
 
     public void createMaze(int dimension, MazeGenerator generator) {

@@ -4,7 +4,7 @@ import org.example.Model.Maze;
 import org.example.Model.MazeGenerator.*;
 import org.example.Model.MazeSolver.MazeSolver;
 import org.example.Model.Model;
-import org.example.View.View;
+import org.example.View.Controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,8 +18,7 @@ import java.util.Scanner;
  * The app will be able to generate a maze (with length = width) with a dimension decided by the user (obviously between some constraints). The app will
  * generate a maze through 5 different algorithms, each one showing a very different technique. Then it will solve it again using 3 or 4 different algorithms.
  *
- * I'll be implementing 2 different user interfaces, one using command line (commonly called CLI), and the other using a more traditional GUI (probably using
- * Swing, because being a toy project I think it's better to suffer a little bit more creating the user interface, but gain a deeper knowledge about how GUI works).
+ * I'll be implementing 2 different user interfaces, one using command line (commonly called CLI), and the other using a more traditional GUI using JavaFX.
  *
  */
 public class AppCLI
@@ -30,8 +29,8 @@ public class AppCLI
         String end;
         int dim;
 
-        View view = new View();
-        Model model = new Model(view);
+        Controller controller = new Controller();
+        Model model = new Model(controller);
 
         List<MazeGenerator> generatorsList = Maze.getAllGenerators();
         List<MazeSolver> solversList = Maze.getAllSolvers();
