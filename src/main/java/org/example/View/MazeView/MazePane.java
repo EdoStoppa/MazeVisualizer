@@ -1,5 +1,6 @@
 package org.example.View.MazeView;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import org.example.Model.Maze;
 
@@ -8,7 +9,10 @@ public class MazePane extends Pane {
     private int dimension;
     private MazeCell[] maze;
 
-    public MazePane(){}
+    public MazePane(){
+        Label hei = new Label("This is an experiment :)");
+        this.getChildren().add(hei);
+    }
     public MazePane(int dimension, boolean wallUp){
         super();
         this.dimension = dimension;

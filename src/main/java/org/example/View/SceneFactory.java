@@ -1,6 +1,5 @@
 package org.example.View;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,12 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
-import org.example.Model.Maze;
-import org.example.Model.MazeGenerator.MazeGenerator;
-import org.example.View.MazeView.MazePane;
 
 import java.io.IOException;
 
@@ -29,8 +22,12 @@ public class SceneFactory {
         return new Scene(root);
     }
 
-    public static Scene mainScene(){
-        BorderPane layout = new BorderPane();
+    public static Scene mainScene() throws IOException {
+        Parent root = FXMLLoader.load(SceneFactory.class.getResource("/FXML/mainScene.fxml"));
+
+        return new Scene(root);
+
+        /*BorderPane layout = new BorderPane();
 
         MazePane mazePane = new MazePane();
         BorderPane.setMargin(mazePane, new Insets(20));
@@ -97,7 +94,7 @@ public class SceneFactory {
         layout.setRight(rightPanel);
         layout.setCenter(mazePane);
 
-        return new Scene(layout, View.getWidth(), View.getHeight());
+        return new Scene(layout, View.getWidth(), View.getHeight());*/
     }
 
     private static HBox getEvolvBtns(){
