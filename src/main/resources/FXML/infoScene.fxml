@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" styleClass="bckg" stylesheets="@../CSS/mainStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.View.FXMLController">
+   <children>
+      <Button layoutX="1116.0" layoutY="842.0" maxHeight="40.0" maxWidth="70.0" minHeight="40.0" minWidth="70.0" mnemonicParsing="false" onAction="#startScene" prefHeight="40.0" prefWidth="70.0" text="Back" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Calibri" size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="hoverButton" />
+         </styleClass>
+      </Button>
+      <Pane layoutX="58.0" layoutY="88.0" prefHeight="724.0" prefWidth="1084.0" style="-fx-background-color: white;">
+         <children>
+            <Text layoutX="50.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to MazeVisualizer!" underline="true">
+               <font>
+                  <Font name="Calibri" size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="50.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a small project done mostly to explore a set of problems that always fascinated me: maze generation! Then, from a small maze generator the project evolved and now it comprehends even a set of algorithm to solve all the generated mazes. Furthermore, you have the option to play with the starting and ending point while solving the maze!" textAlignment="JUSTIFY" wrappingWidth="980.0">
+               <font>
+                  <Font name="Calibri" size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="50.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I don't have that much experience as a developer, so I 'd love to become a better coder and designer at the end of this project." textAlignment="JUSTIFY" wrappingWidth="980.0">
+               <font>
+                  <Font name="Calibri" size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="50.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I sincerely hope that you'll enjoy this small project, and thanks in advance for every feedback!" textAlignment="JUSTIFY" wrappingWidth="980.0">
+               <font>
+                  <Font name="Calibri" size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="928.0" layoutY="669.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edoardo" textAlignment="JUSTIFY">
+               <font>
+                  <Font name="Calibri Italic" size="30.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</Pane>

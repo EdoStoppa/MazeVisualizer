@@ -48,7 +48,6 @@ public class BidirectionalSearch implements MazeSolver{
 
     @Override
     public void solveMaze(Maze maze) {
-        // TODO: Need to create a better common object to synchronize with and to store the cumulative solution
         MiddleMan middleMan = new MiddleMan();
 
         Thread startThread, goalThread;
@@ -164,6 +163,6 @@ public class BidirectionalSearch implements MazeSolver{
 
     @Override
     public String toString(){
-        return "Bidirectional Search Solver";
+        return "Bidirectional Search";
     }
 }

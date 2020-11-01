@@ -76,6 +76,6 @@ public class RecursiveBasic implements MazeSolver{
 
     @Override
     public String toString() {
-        return "Basic Recursive Solver";
+        return "Basic Recursive";
     }
 }

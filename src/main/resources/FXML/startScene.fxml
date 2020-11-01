@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" styleClass="bckg" stylesheets="@../CSS/mainStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.View.FXMLController">
+   <children>
+      <Button fx:id="startButton" layoutX="546.0" layoutY="693.0" mnemonicParsing="false" onAction="#mainScene" stylesheets="@../CSS/mainStyle.css" text="Start" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="Calibri" size="33.0" />
+         </font>
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="hoverButton" />
+         </styleClass>
+      </Button>
+      <Button layoutX="1116.0" layoutY="846.0" maxHeight="40.0" maxWidth="70.0" minHeight="40.0" minWidth="70.0" mnemonicParsing="false" onAction="#infoScene" prefHeight="40.0" prefWidth="70.0" stylesheets="@../CSS/mainStyle.css" text="Info" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="hoverButton" />
+         </styleClass>
+      </Button>
+      <ImageView fitHeight="258.0" fitWidth="965.0" layoutX="118.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../IMG/title.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

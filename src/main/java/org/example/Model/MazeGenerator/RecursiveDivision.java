@@ -87,7 +87,7 @@ public class RecursiveDivision implements MazeGenerator{
 
     @Override
     public String toString() {
-        return "Recursive Division Algorithm";
+        return "Recursive Division";
     }
 
     @Override

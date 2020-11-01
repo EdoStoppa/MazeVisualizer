@@ -1,0 +1,18 @@
+.btn{
+    -fx-background-color: #394867;
+}
+
+.hoverButton:hover {
+    -fx-background-color: #747c8a;
+}
+
+.bckg {
+    -fx-background-color: rgb(2,0,36);
+    -fx-background-color: linear-gradient(#E8F7EE 0%, #577399 45%,#0F1A20 100%);
+}
+
+.title {
+	-fx-text-align: center;
+    -fx-text-transform: uppercase;
+    -fx-text-shadow: #2c2c2c 3px 3px 5px;
+}

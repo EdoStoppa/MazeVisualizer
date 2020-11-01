@@ -60,7 +60,7 @@ public class RandomizedPrim implements MazeGenerator{
 
     @Override
     public String toString() {
-        return "Randomized Prim's Algorithm";
+        return "Randomized Prim";
     }
 
     public void addWalls(Maze m, Position p, List<WallOpt> list){

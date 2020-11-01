@@ -138,6 +138,6 @@ public class MultiplePaths implements MazeGenerator{
 
     @Override
     public String toString(){
-        return "Multiple Paths Algorithm";
+        return "Multiple Paths";
     }
 }

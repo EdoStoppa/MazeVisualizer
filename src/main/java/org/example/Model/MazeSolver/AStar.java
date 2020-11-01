@@ -92,6 +92,6 @@ public class AStar implements MazeSolver{
 
     @Override
     public String toString(){
-        return "A* Search Solver";
+        return "A* Search";
     }
 }

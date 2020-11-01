@@ -3,6 +3,7 @@ package org.example.Model;
 import org.example.Message.Message;
 import org.example.Message.Visited;
 import org.example.Message.WallBreak;
+import org.example.Message.WallRaise;
 import org.example.Model.MazeGenerator.*;
 import org.example.Model.MazeSolver.*;
 import org.example.Observ.Observable;
@@ -88,6 +89,7 @@ public class Maze extends Observable<Message> {
     }
     public void raiseWall(int x, int y, Direction wall){
         maze[x][y].raiseWall(wall.getDirectionInt());
+        notify(new WallRaise(new Position(x,y), wall));
     }
     public void resetMazeVisited(){
         for(int i=0; i<dimension; i++){

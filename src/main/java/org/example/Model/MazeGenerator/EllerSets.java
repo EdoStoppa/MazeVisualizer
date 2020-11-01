@@ -114,6 +114,6 @@ public class EllerSets implements MazeGenerator{
 
     @Override
     public String toString() {
-        return "Eller's Algorithm";
+        return "Eller's Sets";
     }
 }

@@ -82,7 +82,7 @@ public class IterativeBacktracking implements MazeGenerator {
 
     @Override
     public String toString() {
-        return "Iterative Backtracking Algorithm";
+        return "Iterative Backtracking";
     }
 
 }
