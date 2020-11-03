@@ -49,7 +49,7 @@ public class AppCLI
             }
 
             input = getNumInput(in, 0, generatorsList.size());
-            model.createMaze(dim, generatorsList.get(input));
+            controller.createMazeCLI(dim, generatorsList.get(input));
 
             System.out.println("\nPlease, write any of these numbers to select the solver Algorithm");
             for(int i=0; i<solversList.size(); i++){
@@ -57,7 +57,7 @@ public class AppCLI
             }
 
             input = getNumInput(in, 0, solversList.size());
-            model.solveMaze(solversList.get(input));
+            controller.solveMazeCLI(solversList.get(input));
 
             System.out.println("\nThanks for using this App, if you want to generate another maze please type \"n\"!");
             System.out.println("To quit the App please type \"q\".");

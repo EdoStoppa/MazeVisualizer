@@ -24,8 +24,8 @@ public class FXMLMainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        mazePaneBox.getChildren().add(new MazePane());
-        spinnerDim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(8, 100, 20));
+        mazePaneBox.getChildren().add(new MazePane(20, true));
+        spinnerDim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(8, 50, 20));
         choiceGen.setItems(genList);
     }
 

@@ -19,16 +19,19 @@ public class Model extends Observable<Message> implements Observer<Message> {
         this.maze = new Maze(dimension, generator.wallSetup());
         maze.addObserver(this);
         generator.generateMaze(this.maze);
-        maze.print();
     }
     public void solveMaze(MazeSolver solver){
         solver.solveMaze(this.maze);
-        maze.print();
+    }
+
+    public void printMaze() {
+        if(maze!=null)
+            maze.print();
     }
 
     @Override
     public void update(Message message) {
-        //The the mazeGenerator has changed the maze and needs to render those changes
+        //The mazeGenerator has changed the maze and needs to render those changes
         notify(message);
     }
 }
