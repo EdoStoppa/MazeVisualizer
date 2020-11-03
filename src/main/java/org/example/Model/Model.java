@@ -5,7 +5,7 @@ import org.example.Model.MazeGenerator.MazeGenerator;
 import org.example.Model.MazeSolver.MazeSolver;
 import org.example.Observ.Observable;
 import org.example.Observ.Observer;
-import org.example.View.Controller;
+import org.example.Controller.Controller;
 
 public class Model extends Observable<Message> implements Observer<Message> {
     private Maze maze;

@@ -2,13 +2,15 @@ package org.example.View;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.example.Controller.Controller;
+import org.example.Model.Model;
 import org.example.View.MazeView.MazePane;
 
 public class View extends Application {
-    public static Controller controller;
-    public static Stage primaryStage;
-    public static MazePane mazePane;
-    private static int height = 960, width = 1200;
+    public static Controller controller = null;
+    public static Stage primaryStage = null;
+    public static MazePane mazePane = null;
+    private static int height = 900, width = 1200;
 
     public static void begin(String[] args) {
         launch(args);
@@ -16,7 +18,6 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        controller = new Controller();
         primaryStage = stage;
         primaryStage.setResizable(false);
         primaryStage.setTitle("MazeVisualizer");

@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import org.example.Model.Maze;
 import org.example.Model.MazeGenerator.MazeGenerator;
 import org.example.View.MazeView.MazePane;
+import org.example.View.View;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,7 +25,8 @@ public class FXMLMainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        mazePaneBox.getChildren().add(new MazePane(20, true));
+        View.mazePane = new MazePane(20, true);
+        mazePaneBox.getChildren().add(View.mazePane);
         spinnerDim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(8, 50, 20));
         choiceGen.setItems(genList);
     }

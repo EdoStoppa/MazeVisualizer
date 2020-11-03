@@ -4,7 +4,7 @@ import org.example.Model.Maze;
 import org.example.Model.MazeGenerator.*;
 import org.example.Model.MazeSolver.MazeSolver;
 import org.example.Model.Model;
-import org.example.View.Controller;
+import org.example.Controller.Controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -31,6 +31,7 @@ public class AppCLI
 
         Controller controller = new Controller();
         Model model = new Model(controller);
+        controller.setModel(model);
 
         List<MazeGenerator> generatorsList = Maze.getAllGenerators();
         List<MazeSolver> solversList = Maze.getAllSolvers();

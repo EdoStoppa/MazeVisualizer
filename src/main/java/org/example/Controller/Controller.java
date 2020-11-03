@@ -1,4 +1,4 @@
-package org.example.View;
+package org.example.Controller;
 
 import javafx.event.ActionEvent;
 import org.example.Message.Message;
@@ -6,17 +6,13 @@ import org.example.Model.MazeGenerator.MazeGenerator;
 import org.example.Model.MazeSolver.MazeSolver;
 import org.example.Model.Model;
 import org.example.Observ.Observer;
+import org.example.View.View;
 
 public class Controller implements Observer<Message> {
     Model model;
 
-    public Controller(){
+    public void setModel(Model model){
         this.model = new Model(this);
-    }
-
-    @Override
-    public void update(Message message) {
-
     }
 
     public void createMaze(int dim, MazeGenerator gen) {
@@ -38,4 +34,9 @@ public class Controller implements Observer<Message> {
         model.printMaze();
     }
 
+    @Override
+    public void update(Message message) {
+        if(View.primaryStage!=null)
+            message.renderGUI();
+    }
 }
