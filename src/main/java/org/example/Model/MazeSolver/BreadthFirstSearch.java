@@ -63,7 +63,7 @@ public class BreadthFirstSearch implements MazeSolver{
                             nodeFifo.addLast(new Node(nextPos, cur));
                         }
                     }
-                    maze.setCellAsVisited(curPos);
+                    maze.setCellAsVisited(curPos, true);
                 }
             }
         }

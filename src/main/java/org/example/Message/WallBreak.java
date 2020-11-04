@@ -1,7 +1,10 @@
 package org.example.Message;
 
+import javafx.application.Platform;
 import org.example.Model.Direction;
 import org.example.Model.Position;
+import org.example.View.MazeView.MazePane;
+import org.example.View.View;
 
 public class WallBreak implements Message{
     private final Position oldPos, newPos;
@@ -25,6 +28,10 @@ public class WallBreak implements Message{
 
     @Override
     public void renderGUI() {
-
+        Platform.runLater(() -> {
+            MazePane mazePane = View.mazePane;
+            mazePane.changeWall(oldPos, dir, false);
+            mazePane.changeWall(newPos, Direction.getDir(dir.getOppositeDirectionInt()), false);
+        });
     }
 }

@@ -29,7 +29,7 @@ public class RandomizedPrim implements MazeGenerator{
         Random rand = new Random();
         Position nextPos, curPos = new Position(rand.nextInt(maze.getDimension()), rand.nextInt(maze.getDimension()));
         WallOpt pickedWall;
-        maze.setCellAsVisited(curPos);
+        maze.setCellAsVisited(curPos, false);
         addWalls(maze, curPos, wallList);
 
         while(!wallList.isEmpty()){
@@ -40,7 +40,7 @@ public class RandomizedPrim implements MazeGenerator{
             if(maze.isAcceptablePos(nextPos)){
                 if(maze.cellWasVisited(curPos) && !maze.cellWasVisited(nextPos)){
                     maze.breakWalls(curPos, pickedWall.getWallDir());
-                    maze.setCellAsVisited(nextPos);
+                    maze.setCellAsVisited(nextPos, false);
                     addWalls(maze, nextPos, wallList);
                 }
             }

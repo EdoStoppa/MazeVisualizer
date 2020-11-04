@@ -1,7 +1,13 @@
 package org.example.View.MazeView;
 
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import org.example.Model.Direction;
+import org.example.Model.Position;
+
+import java.util.List;
 
 public class MazePane extends Pane {
     private final float fullDim = 800;
@@ -41,6 +47,19 @@ public class MazePane extends Pane {
             cell.setWallVisible(2, true);
         if(k==dim-1)
             cell.setWallVisible(1, true);
+    }
+
+    public void changeWall(Position pos, Direction dir, boolean b){
+        maze[pos.getPosY()][pos.getPosX()].setWallVisible(dir.getDirectionInt(), b);
+    }
+
+    public void showVisited(Position pos){
+        maze[pos.getPosY()][pos.getPosX()].setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, new Insets(0))));
+    }
+
+    public void showSolution(List<Position> listPos){
+        for(Position pos : listPos)
+            maze[pos.getPosY()][pos.getPosX()].setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, new Insets(0))));
     }
 
 }

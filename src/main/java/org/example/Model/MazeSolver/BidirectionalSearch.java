@@ -126,7 +126,7 @@ public class BidirectionalSearch implements MazeSolver{
                         }
                     }
 
-                    maze.setCellAsVisited(curPos);
+                    maze.setCellAsVisited(curPos, true);
                 }
             }
 

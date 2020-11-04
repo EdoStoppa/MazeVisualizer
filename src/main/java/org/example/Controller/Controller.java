@@ -15,6 +15,14 @@ public class Controller implements Observer<Message> {
         this.model = new Model(this);
     }
 
+    public void setStart(int x, int y) {
+        model.setStart(x,y);
+    }
+
+    public void setEnd(int x, int y) {
+        model.setEnd(x,y);
+    }
+
     public void createMaze(int dim, MazeGenerator gen) {
         // :)
         model.createMaze(dim, gen);

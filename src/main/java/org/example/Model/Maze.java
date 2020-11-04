@@ -60,9 +60,10 @@ public class Maze extends Observable<Message> {
     }
 
     //----------- Methods used to interacts with a maze's cell given the position and/or movement direction -----------
-    public void setCellAsVisited(Position p){
+    public void setCellAsVisited(Position p, boolean sendNotify){
         this.maze[p.getPosX()][p.getPosY()].setAsVisited();
-        notify(new Visited(p.clone()));
+        if(sendNotify)
+            notify(new Visited(p.clone()));
     }
     public boolean cellWasVisited(Position p){
         return this.maze[p.getPosX()][p.getPosY()].hasBeenVisited();

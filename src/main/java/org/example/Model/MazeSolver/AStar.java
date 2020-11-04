@@ -69,7 +69,7 @@ public class AStar implements MazeSolver{
                             nodeQueue.add(new Node(nextPos, cur, rootDist(cur), manhattanDist(curPos, goal.clone())));
                         }
                     }
-                    maze.setCellAsVisited(curPos);
+                    maze.setCellAsVisited(curPos, true);
                 }
             }
         }

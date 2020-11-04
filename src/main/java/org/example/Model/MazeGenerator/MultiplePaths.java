@@ -35,11 +35,11 @@ public class MultiplePaths implements MazeGenerator{
         int endCounter = dimension*dimension - 2;
 
         pos = new Position(rand.nextInt(maze.getDimension()),rand.nextInt(maze.getDimension()));
-        maze.setCellAsVisited(pos);
+        maze.setCellAsVisited(pos, false);
         startSet.put(pos.toString(), pos);
 
         pos = new Position(rand.nextInt(maze.getDimension()), rand.nextInt(maze.getDimension()));
-        maze.setCellAsVisited(pos);
+        maze.setCellAsVisited(pos, false);
         goalSet.put(pos.toString(), pos);
 
         while(endCounter > 0){
@@ -88,7 +88,7 @@ public class MultiplePaths implements MazeGenerator{
                     if(!searchSet.containsKey(next.toString())) {
                         if (!checkSet.containsKey(next.toString())) {
                             maze.breakWalls(cur, dir);
-                            maze.setCellAsVisited(next);
+                            maze.setCellAsVisited(next, false);
                             searchSet.put(next.toString(), next);
                             found = true;
                             addBorder(next, checkSet, mixed);

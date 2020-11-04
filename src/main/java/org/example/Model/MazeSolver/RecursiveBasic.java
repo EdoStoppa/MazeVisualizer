@@ -47,6 +47,7 @@ public class RecursiveBasic implements MazeSolver{
         Random rand = new Random();
 
         if(pos.equals(goal)){
+            maze.setCellAsVisited(pos, true);
             solution.add(pos);
             return true;
         }
@@ -54,7 +55,7 @@ public class RecursiveBasic implements MazeSolver{
         if(maze.cellWasVisited(pos))
             return false;
 
-        maze.setCellAsVisited(pos);
+        maze.setCellAsVisited(pos, true);
 
         // choosing at random every step to expand ensures an unbiased search + it's less code :)
         dir = dirList.get(rand.nextInt(4));
