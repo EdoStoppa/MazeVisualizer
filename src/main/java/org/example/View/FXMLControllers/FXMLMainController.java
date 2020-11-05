@@ -75,8 +75,8 @@ public class FXMLMainController implements Initializable {
             // Prepare new rightPane
             startXSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue(), 0));
             startYSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue(), 0));
-            endXSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue(), spinnerDim.getValue()));
-            endYSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue(), spinnerDim.getValue()));
+            endXSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue()-1, spinnerDim.getValue()-1));
+            endYSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue()-1, spinnerDim.getValue()-1));
 
             // Set visible correct buttons!
             solveBtn.setVisible(true);
@@ -85,6 +85,10 @@ public class FXMLMainController implements Initializable {
             // Set visible new rightPane
             rightGen.setVisible(false);
             rightSolve.setVisible(true);
+
+            View.mazePane.showStart();
+            View.mazePane.showEnd();
+
         }
     }
 

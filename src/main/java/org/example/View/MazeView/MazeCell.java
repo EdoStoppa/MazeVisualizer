@@ -1,16 +1,23 @@
 package org.example.View.MazeView;
 
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class MazeCell extends Pane {
-    private List<Line> wallList = new ArrayList<>();
+    private final int dim;
+    private final List<Line> wallList = new ArrayList<>();
 
     public MazeCell(int dim, boolean wallUp){
+        this.dim = dim;
         this.setMaxSize(dim, dim);
         this.setMinSize(dim, dim);
 
@@ -27,10 +34,22 @@ public class MazeCell extends Pane {
             this.getChildren().add(l);
         }
 
-        //this.setBorder(new Border(new BorderStroke(Color.valueOf("#9E9E9E"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
 
     public void setWallVisible(int wall, boolean b){
         wallList.get(wall).setVisible(b);
     }
+
+    public void showStart() {
+        Rectangle container = new Rectangle(this.dim, this.dim);
+        container.setFill(new ImagePattern(MazePane.imageMap.get("start")));
+        this.getChildren().add(container);
+    }
+    public void showEnd() {
+        Rectangle container = new Rectangle(this.dim, this.dim);
+        container.setFill(new ImagePattern(MazePane.imageMap.get("end")));
+        this.getChildren().add(container);
+    }
+
+
 }

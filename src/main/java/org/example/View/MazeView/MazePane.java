@@ -2,31 +2,39 @@ package org.example.View.MazeView;
 
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.example.Model.Direction;
 import org.example.Model.Position;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class MazePane extends Pane {
-    private final float fullDim = 800;
     private final int dim;
+    private Position start, end;
     private final MazeCell[][] maze;
+    static final HashMap<String, Image> imageMap = new HashMap<>();
 
     public MazePane(int dimension, boolean wallUp){
         super();
+        initImages();
         this.dim = dimension;
+        this.start = new Position(0,0);
+        this.end = new Position(dim-1, dim-1);
         this.maze = new MazeCell[dim][dim];
         Group tileGroup = new Group();
 
         for(int i=0; i<dim; i++){
             for(int k=0; k<dim; k++){
-                MazeCell cell = new MazeCell((int) fullDim/dim, wallUp);
+                float fullDim = 800;
+                MazeCell cell = new MazeCell((int) fullDim /dim, wallUp);
                 maze[i][k] = cell;
                 tileGroup.getChildren().add(cell);
-                cell.setLayoutX((fullDim/dim)*i);
-                cell.setLayoutY((fullDim/dim)*k);
+                cell.setLayoutX((fullDim /dim)*i);
+                cell.setLayoutY((fullDim /dim)*k);
 
                 if(!wallUp){
                     resetWalls(cell, k, i);
@@ -62,4 +70,30 @@ public class MazePane extends Pane {
             maze[pos.getPosY()][pos.getPosX()].setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, new Insets(0))));
     }
 
+    public void showStart(){
+        maze[start.getPosY()][start.getPosX()].showStart();
+    }
+    public void showEnd(){
+        maze[end.getPosY()][end.getPosX()].showEnd();
+    }
+
+    public void removeStart(){
+        maze[start.getPosY()][start.getPosX()].getChildren().remove(4);
+    }
+    public void removeEnd(){
+        maze[end.getPosY()][end.getPosX()].getChildren().remove(4);
+    }
+
+    public void setStart(Position start) {
+        this.start = start;
+    }
+    public void setEnd(Position end) {
+        this.end = end;
+    }
+
+    private void initImages() {
+        imageMap.put("start", new Image(Objects.requireNonNull(MazeCell.class.getClassLoader().getResourceAsStream("IMG/startPoint.png"))));
+        imageMap.put("end", new Image(Objects.requireNonNull(MazeCell.class.getClassLoader().getResourceAsStream("IMG/endPoint.png"))));
+
+    }
 }
