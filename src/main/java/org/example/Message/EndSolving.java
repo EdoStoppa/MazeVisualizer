@@ -1,6 +1,5 @@
 package org.example.Message;
 
-import javafx.application.Platform;
 import org.example.Model.Position;
 import org.example.View.View;
 
@@ -16,8 +15,6 @@ public class EndSolving implements Message{
 
     @Override
     public void renderGUI() {
-        Platform.runLater(() -> {
-            View.mazePane.showSolution(solution);
-        });
+        View.mazePane.showSolving(solution);
     }
 }

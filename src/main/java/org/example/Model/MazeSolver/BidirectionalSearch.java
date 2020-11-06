@@ -100,6 +100,7 @@ public class BidirectionalSearch implements MazeSolver{
                     curPos = cur.getPos();
 
                     if (curPos.equals(goal)) {
+                        maze.setCellAsVisited(curPos, true);
                         middleMan.setMeetingPos(curPos.clone());
                         middleMan.stopSearch();
                         return cur;
@@ -114,6 +115,7 @@ public class BidirectionalSearch implements MazeSolver{
 
                             if (maze.cellWasVisited(nextPos)) {
                                 if (!nodeMap.containsKey(nextPos.toString())) {
+                                    maze.setCellAsVisited(curPos, true);
                                     middleMan.setMeetingPos(nextPos.clone());
                                     middleMan.stopSearch();
                                     return new Node(nextPos, cur);

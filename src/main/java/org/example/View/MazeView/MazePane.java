@@ -5,12 +5,12 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import org.example.Message.Visited;
 import org.example.Model.Direction;
 import org.example.Model.Position;
+import org.example.View.View;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class MazePane extends Pane {
     private final int dim;
@@ -61,13 +61,38 @@ public class MazePane extends Pane {
         maze[pos.getPosY()][pos.getPosX()].setWallVisible(dir.getDirectionInt(), b);
     }
 
-    public void showVisited(Position pos){
-        maze[pos.getPosY()][pos.getPosX()].setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, new Insets(0))));
+    public void showSolving(List<Position> listPos){
+        TimerTask visitedTask, solutionTask;
+
+        solutionTask = new TimerTask() {
+            public void run() {
+                if(listPos.size() > 0){
+                    Position pos = listPos.get(0);
+                    fillCell(pos, Color.LIGHTGREEN);
+                    listPos.remove(0);
+                } else
+                    cancel();
+            }
+        };
+
+        visitedTask = new TimerTask() {
+            public void run() {
+                if(Visited.listVisited.size() > 0){
+                    Position pos = Visited.listVisited.get(0);
+                    fillCell(pos, Color.YELLOW);
+                    Visited.listVisited.remove(0);
+                } else{
+                    cancel();
+                    View.timer.schedule(solutionTask, 0, -(3*dim/4) + 45);
+                }
+            }
+        };
+
+        View.timer.schedule(visitedTask, 0, (-dim/2 + 30));
     }
 
-    public void showSolution(List<Position> listPos){
-        for(Position pos : listPos)
-            maze[pos.getPosY()][pos.getPosX()].setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, new Insets(0))));
+    private void fillCell(Position pos, Color c){
+        maze[pos.getPosY()][pos.getPosX()].setBackground(new Background(new BackgroundFill(c, CornerRadii.EMPTY, new Insets(0))));
     }
 
     public void showStart(){

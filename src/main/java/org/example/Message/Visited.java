@@ -3,7 +3,11 @@ package org.example.Message;
 import org.example.Model.Position;
 import org.example.View.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Visited implements Message{
+    public static final List<Position> listVisited = new ArrayList<>();
     private final Position pos;
 
     public Visited(Position pos){
@@ -16,6 +20,6 @@ public class Visited implements Message{
 
     @Override
     public void renderGUI() {
-        View.mazePane.showVisited(pos);
+        listVisited.add(pos);
     }
 }
