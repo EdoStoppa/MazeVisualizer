@@ -52,9 +52,10 @@ public class BreadthFirstSearch implements MazeSolver{
             cur = nodeFifo.removeFirst();
             curPos = cur.getPos();
 
-            if(curPos.equals(goal))
+            if(curPos.equals(goal)) {
+                maze.setCellAsVisited(curPos, true);
                 break;
-            else {
+            } else {
                 if(!maze.cellWasVisited(curPos)){
                     dirList = Direction.getAllDir();
                     for(Direction dir : dirList){

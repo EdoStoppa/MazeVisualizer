@@ -40,8 +40,9 @@ public class FXMLMainController implements Initializable {
     @FXML private ChoiceBox<MazeSolver> choiceSolve;
 
     @FXML private Button genBtn;
+    @FXML private Button goToSolveBtn;
     @FXML private Button solveBtn;
-    @FXML private Button newBtn;
+    @FXML private Button goToNewBtn;
 
     @FXML private Pane mazePaneBox;
 
@@ -63,50 +64,61 @@ public class FXMLMainController implements Initializable {
         if(choiceGen.getValue() != null){
             // Set invisible the Generate Button
             genBtn.setVisible(false);
+            goToSolveBtn.setVisible(false);
 
             // Create mew mazePane with correct dimension and correct walls values
             View.mazePane = new MazePane(spinnerDim.getValue(), choiceGen.getValue().wallSetup());
+
             mazePaneBox.getChildren().clear();
             mazePaneBox.getChildren().add(View.mazePane);
 
             // Start maze's creation
             View.controller.createMaze(spinnerDim.getValue(), choiceGen.getValue());
 
-            // Prepare new rightPane
-            startXSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue(), 0));
-            startYSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue(), 0));
-            endXSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue()-1, spinnerDim.getValue()-1));
-            endYSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue()-1, spinnerDim.getValue()-1));
-
-            // Set visible correct buttons!
-            solveBtn.setVisible(true);
-            newBtn.setVisible(false);
-
-            // Set visible new rightPane
-            rightGen.setVisible(false);
-            rightSolve.setVisible(true);
-
-            View.mazePane.showStart();
-            View.mazePane.showEnd();
-
+            // Re-enable genBtn + enable go to solve button
+            genBtn.setVisible(true);
+            goToSolveBtn.setVisible(true);
         }
+    }
+    public void goToSolve(ActionEvent actionEvent) {
+
+
+        // Prepare new rightPane
+        startXSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue(), 0));
+        startYSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue(), 0));
+        endXSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue()-1, spinnerDim.getValue()-1));
+        endYSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, spinnerDim.getValue()-1, spinnerDim.getValue()-1));
+
+        // Set visible correct buttons!
+        solveBtn.setVisible(true);
+
+        // Set visible new rightPane
+        rightGen.setVisible(false);
+        rightSolve.setVisible(true);
+
+        View.mazePane.showStart();
+        View.mazePane.showEnd();
+
     }
 
     public void launchSolving(ActionEvent actionEvent){
         if(choiceSolve.getValue() != null){
             // Set invisible the solve button
             solveBtn.setVisible(false);
+            goToNewBtn.setVisible(false);
+            View.mazePane.resetMazeVisited();
 
             // Solve the maze
             View.controller.solveMaze(choiceSolve.getValue());
-            // Set visible new button
-            newBtn.setVisible(true);
         }
     }
-
-    public void newMaze(ActionEvent actionEvent) throws IOException {
+    public void goToNew(ActionEvent actionEvent) throws IOException{
         Scene scene = SceneFactory.mainScene();
         View.primaryStage.setScene(scene);
+    }
+    public void enableSolveBtns(){
+        solveBtn.setVisible(true);
+        goToNewBtn.setVisible(true);
     }
 
     public void setStart(ActionEvent actionEvent) {
@@ -119,4 +131,5 @@ public class FXMLMainController implements Initializable {
             View.controller.setEnd(endYSpinner.getValue(), endXSpinner.getValue());
         }
     }
+
 }

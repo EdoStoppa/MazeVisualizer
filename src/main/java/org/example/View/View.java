@@ -2,6 +2,7 @@ package org.example.View;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import org.example.Controller.Controller;
 import org.example.View.MazeView.MazePane;
@@ -13,6 +14,7 @@ public class View extends Application {
     public static Controller controller = null;
     public static Stage primaryStage = null;
     public static MazePane mazePane = null;
+    public static FXMLLoader loader;
 
     public static void begin(String[] args) {
         launch(args);

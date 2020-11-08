@@ -58,9 +58,10 @@ public class AStar implements MazeSolver{
             cur = nodeQueue.poll();
             curPos = cur.getPos();
 
-            if(curPos.equals(goal))
+            if(curPos.equals(goal)){
+                maze.setCellAsVisited(curPos, true);
                 break;
-            else {
+            } else {
                 if(!maze.cellWasVisited(curPos)){
                     dirList = Direction.getAllDir();
                     for(Direction dir : dirList){

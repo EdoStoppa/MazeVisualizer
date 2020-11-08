@@ -1,5 +1,6 @@
 package org.example.View.MazeView;
 
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -8,6 +9,7 @@ import javafx.scene.paint.Color;
 import org.example.Message.Visited;
 import org.example.Model.Direction;
 import org.example.Model.Position;
+import org.example.View.FXMLControllers.FXMLMainController;
 import org.example.View.View;
 
 import java.util.*;
@@ -70,8 +72,11 @@ public class MazePane extends Pane {
                     Position pos = listPos.get(0);
                     fillCell(pos, Color.LIGHTGREEN);
                     listPos.remove(0);
-                } else
+                } else {
                     cancel();
+                    ((FXMLMainController) View.loader.getController()).enableSolveBtns();
+                }
+
             }
         };
 
@@ -120,5 +125,12 @@ public class MazePane extends Pane {
         imageMap.put("start", new Image(Objects.requireNonNull(MazeCell.class.getClassLoader().getResourceAsStream("IMG/startPoint.png"))));
         imageMap.put("end", new Image(Objects.requireNonNull(MazeCell.class.getClassLoader().getResourceAsStream("IMG/endPoint.png"))));
 
+    }
+    public void resetMazeVisited(){
+        for(int i=0; i<dim; i++){
+            for(int j=0; j<dim; j++){
+                maze[i][j].setBackground(null);
+            }
+        }
     }
 }
