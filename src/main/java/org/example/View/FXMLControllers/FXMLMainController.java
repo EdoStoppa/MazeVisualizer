@@ -51,10 +51,10 @@ public class FXMLMainController implements Initializable {
         rightGen.setVisible(true);
         rightSolve.setVisible(false);
 
-        View.mazePane = new MazePane(20, true);
+        View.mazePane = new MazePane(40, true);
         mazePaneBox.getChildren().add(View.mazePane);
 
-        spinnerDim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(8, 50, 20));
+        spinnerDim.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(8, 80, 40));
 
         choiceGen.setItems(genList);
         choiceSolve.setItems(solversList);
